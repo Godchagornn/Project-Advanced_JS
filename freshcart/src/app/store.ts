@@ -4,6 +4,7 @@ import uiReducer from '../features/ui/uiSlice'
 import { productsApi } from '../features/products/productsApi'
 import { cartApi } from '../features/cart/cartApi'
 import { ordersApi } from '../features/orders/ordersApi'
+import { reviewsApi } from '../features/reviews/reviewsApi'
 
 export const store = configureStore({
   reducer: {
@@ -12,12 +13,14 @@ export const store = configureStore({
     [productsApi.reducerPath]: productsApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
     [ordersApi.reducerPath]: ordersApi.reducer,
+    [reviewsApi.reducerPath]: reviewsApi.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(
       productsApi.middleware,
       cartApi.middleware,
-      ordersApi.middleware
+      ordersApi.middleware,
+      reviewsApi.middleware
     ),
 })
 
