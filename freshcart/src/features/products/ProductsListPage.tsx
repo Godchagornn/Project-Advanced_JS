@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useGetProductsQuery } from './productsApi'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -10,7 +10,7 @@ import {
   setViewMode,
 } from '../filters/filtersSlice'
 import type { CategoryFilter, SortBy } from '../filters/filtersSlice'
-import type { Product } from '../../types/models'
+import { selectSortedProducts } from '../../selectors/productSelectors'
 import { useDebounce } from '../../hooks/useDebounce'
 import ProductCard from './ProductCard'
 import Input from '../../components/Input/Input'
@@ -34,47 +34,21 @@ const SORT_OPTIONS = [
   { value: 'ratingDesc', label: 'Top rated' },
 ]
 
-function applyFiltersAndSort(
-  products: Product[],
-  search: string,
-  category: CategoryFilter,
-  sortBy: SortBy,
-  inStockOnly: boolean
-): Product[] {
-  let result = [...products]
-
-  if (category !== 'all') {
-    result = result.filter(p => p.category === category)
-  }
-
-  if (inStockOnly) {
-    result = result.filter(p => p.inStock)
-  }
-
-  if (search.trim()) {
-    const q = search.toLowerCase()
-    result = result.filter(
-      p => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
-    )
-  }
-
-  result.sort((a, b) => {
-    if (sortBy === 'priceAsc') return a.pricePerUnit - b.pricePerUnit
-    if (sortBy === 'priceDesc') return b.pricePerUnit - a.pricePerUnit
-    if (sortBy === 'ratingDesc') return b.rating - a.rating
-    return a.name.localeCompare(b.name)
-  })
-
-  return result
-}
-
 export default function ProductsListPage() {
   const dispatch = useAppDispatch()
   const [searchParams] = useSearchParams()
   const { search, category, sortBy, inStockOnly, viewMode } = useAppSelector(s => s.filters)
-  const debouncedSearch = useDebounce(search, 300)
 
-  const { data: products, isLoading, isError, refetch } = useGetProductsQuery()
+  // Local input value debounced before hitting Redux so the selector stays efficient
+  const [localSearch, setLocalSearch] = useState(search)
+  const debouncedSearch = useDebounce(localSearch, 300)
+
+  const { isLoading, isError, refetch } = useGetProductsQuery()
+  const filtered = useAppSelector(selectSortedProducts)
+
+  useEffect(() => {
+    dispatch(setSearch(debouncedSearch))
+  }, [debouncedSearch, dispatch])
 
   // Sync ?category= query param from HomePage links
   useEffect(() => {
@@ -83,10 +57,6 @@ export default function ProductsListPage() {
       dispatch(setCategory(cat))
     }
   }, [searchParams, dispatch])
-
-  const filtered = products
-    ? applyFiltersAndSort(products, debouncedSearch, category, sortBy, inStockOnly)
-    : []
 
   return (
     <div>
@@ -99,8 +69,8 @@ export default function ProductsListPage() {
         <div className={styles.searchWrap}>
           <Input
             placeholder="Search fruits, vegetables…"
-            value={search}
-            onChange={e => dispatch(setSearch(e.target.value))}
+            value={localSearch}
+            onChange={e => setLocalSearch(e.target.value)}
             aria-label="Search products"
           />
         </div>

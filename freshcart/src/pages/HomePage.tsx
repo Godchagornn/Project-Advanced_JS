@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useGetProductsQuery } from '../features/products/productsApi'
+import { useAppSelector } from '../app/hooks'
+import { selectFeaturedProducts, selectAllProducts } from '../selectors/productSelectors'
 import ProductCard from '../features/products/ProductCard'
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage'
 import Skeleton from '../components/Skeleton/Skeleton'
@@ -12,14 +14,11 @@ const CATEGORIES = [
 ] as const
 
 export default function HomePage() {
-  const { data: products, isLoading, isError, refetch } = useGetProductsQuery()
+  const { isLoading, isError, refetch } = useGetProductsQuery()
+  const products = useAppSelector(selectAllProducts)
+  const featured = useAppSelector(selectFeaturedProducts)
 
-  const featured = products
-    ? [...products].sort((a, b) => b.rating - a.rating).slice(0, 4)
-    : []
-
-  const categoryCount = (cat: string) =>
-    products ? products.filter(p => p.category === cat).length : 0
+  const categoryCount = (cat: string) => products.filter(p => p.category === cat).length
 
   return (
     <div>
