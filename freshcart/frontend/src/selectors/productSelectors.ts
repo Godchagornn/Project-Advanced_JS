@@ -29,6 +29,14 @@ export const selectFilteredProducts = createSelector(
       )
     }
 
+    result = result.filter(
+      p => p.pricePerUnit >= filters.minPrice && p.pricePerUnit <= filters.maxPrice
+    )
+
+    if (filters.minRating > 0) {
+      result = result.filter(p => p.rating >= filters.minRating)
+    }
+
     return result
   }
 )

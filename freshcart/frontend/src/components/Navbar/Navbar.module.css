@@ -17,7 +17,7 @@
   height: 68px;
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 20px;
 }
 
 /* ── Logo ── */
@@ -61,7 +61,6 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  flex: 1;
 }
 
 .link {

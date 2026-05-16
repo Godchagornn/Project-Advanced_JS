@@ -27,6 +27,8 @@ export default {
         'fade-in': 'fadeIn 0.5s ease forwards',
         'fade-in-up': 'fadeInUp 0.5s ease forwards',
         shimmer: 'shimmer 2s linear infinite',
+        blob: 'blob 7s infinite',
+        marquee: 'marquee 20s linear infinite',
       },
       keyframes: {
         float: {
@@ -44,6 +46,15 @@ export default {
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
+        },
+        blob: {
+          '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       backdropBlur: {

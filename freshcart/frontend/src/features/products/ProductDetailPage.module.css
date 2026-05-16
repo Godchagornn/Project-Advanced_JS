@@ -1,5 +1,7 @@
 .page {
   animation: fadeIn 0.4s ease both;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .back {
@@ -26,9 +28,10 @@
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: minmax(280px, 420px) minmax(0, 580px);
+  gap: 52px;
   margin-bottom: 48px;
+  align-items: start;
 }
 
 /* Image */
@@ -63,7 +66,12 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-2xl);
+  padding: 32px 36px;
+  box-shadow: var(--shadow-sm);
 }
 
 .category {
@@ -183,9 +191,10 @@
 /* Trust badges */
 .trustRow {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   padding-top: 4px;
+  margin-top: auto;
 }
 
 .trustItem {
@@ -195,10 +204,13 @@
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--color-text-muted);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  padding: 6px 12px;
+  background: var(--color-primary-pale);
+  border: 1px solid var(--color-border-light);
+  padding: 8px 14px;
   border-radius: var(--radius-full);
+  flex: 1;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .trustIcon {
@@ -209,12 +221,16 @@
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 24px;
   }
 
   .imageWrap {
     max-width: 480px;
     margin: 0 auto;
     width: 100%;
+  }
+
+  .info {
+    padding: 24px 20px;
   }
 }

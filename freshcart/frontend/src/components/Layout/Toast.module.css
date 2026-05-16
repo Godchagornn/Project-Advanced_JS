@@ -1,6 +1,6 @@
 .toast {
   position: fixed;
-  bottom: 28px;
+  top: 88px;
   right: 28px;
   z-index: 500;
   padding: 14px 20px 14px 16px;
@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  animation: slideUp 0.3s cubic-bezier(.34,1.56,.64,1) both;
+  animation: slideDown 0.3s cubic-bezier(.34,1.56,.64,1) both;
   backdrop-filter: blur(8px);
 }
 
@@ -42,7 +42,7 @@
   box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4), var(--shadow-lg);
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-16px) scale(0.95); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
