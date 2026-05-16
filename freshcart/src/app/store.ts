@@ -3,6 +3,7 @@ import filtersReducer from '../features/filters/filtersSlice'
 import uiReducer from '../features/ui/uiSlice'
 import { productsApi } from '../features/products/productsApi'
 import { cartApi } from '../features/cart/cartApi'
+import { ordersApi } from '../features/orders/ordersApi'
 
 export const store = configureStore({
   reducer: {
@@ -10,9 +11,14 @@ export const store = configureStore({
     ui: uiReducer,
     [productsApi.reducerPath]: productsApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
+    [ordersApi.reducerPath]: ordersApi.reducer,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(productsApi.middleware, cartApi.middleware),
+    getDefaultMiddleware().concat(
+      productsApi.middleware,
+      cartApi.middleware,
+      ordersApi.middleware
+    ),
 })
 
 export type RootState = ReturnType<typeof store.getState>
