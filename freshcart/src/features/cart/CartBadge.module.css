@@ -1,0 +1,36 @@
+.link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
+  text-decoration: none;
+}
+
+.link:hover {
+  background: rgb(255 255 255 / 0.15);
+}
+
+.icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--color-secondary);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
