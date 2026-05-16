@@ -1,0 +1,11 @@
+{
+  "name": "freshcart-backend",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "node server.cjs",
+    "reset-db": "git checkout db.json"
+  },
+  "dependencies": {
+    "json-server": "0.17.4"
+  }
+}

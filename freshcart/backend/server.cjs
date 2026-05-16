@@ -18,6 +18,7 @@ server.use((req, _res, next) => {
 })
 
 server.use(router)
-server.listen(3001, () => {
-  console.log('JSON Server running at http://localhost:3001')
+const PORT = process.env.PORT || 3001
+server.listen(PORT, () => {
+  console.log(`JSON Server running at http://localhost:${PORT}`)
 })
