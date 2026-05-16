@@ -7,7 +7,9 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export default function Input({ label, error, id, className = '', ...rest }: Props) {
-  const inputClass = [styles.input, error ? styles.hasError : '', className].filter(Boolean).join(' ')
+  const inputClass = [styles.input, error ? styles.hasError : '', className]
+    .filter(Boolean)
+    .join(' ')
 
   return (
     <div className={styles.wrapper}>

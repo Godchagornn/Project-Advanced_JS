@@ -4,10 +4,7 @@ import type { RootState } from '../app/store'
 
 const selectProductsResult = productsApi.endpoints.getProducts.select()
 
-export const selectAllProducts = createSelector(
-  selectProductsResult,
-  result => result.data ?? []
-)
+export const selectAllProducts = createSelector(selectProductsResult, result => result.data ?? [])
 
 const selectFilters = (state: RootState) => state.filters
 

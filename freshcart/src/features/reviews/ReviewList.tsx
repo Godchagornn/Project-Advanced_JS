@@ -42,17 +42,23 @@ function ReviewCard({
           <p className={styles.author}>{review.author}</p>
           <RatingStars rating={review.rating} size="sm" />
         </div>
-        <span className={styles.date}>
-          {format(new Date(review.createdAt), 'dd MMM yyyy')}
-        </span>
+        <span className={styles.date}>{format(new Date(review.createdAt), 'dd MMM yyyy')}</span>
       </div>
       <p className={styles.reviewTitle}>{review.title}</p>
       <p className={styles.body}>{review.body}</p>
       <div className={styles.actions}>
-        <button type="button" className={[styles.actionBtn, styles.editBtn].join(' ')} onClick={() => onEdit(review)}>
+        <button
+          type="button"
+          className={[styles.actionBtn, styles.editBtn].join(' ')}
+          onClick={() => onEdit(review)}
+        >
           Edit
         </button>
-        <button type="button" className={[styles.actionBtn, styles.deleteBtn].join(' ')} onClick={handleDelete}>
+        <button
+          type="button"
+          className={[styles.actionBtn, styles.deleteBtn].join(' ')}
+          onClick={handleDelete}
+        >
           Delete
         </button>
       </div>
@@ -72,9 +78,7 @@ export default function ReviewList({ productId }: Props) {
 
       {isLoading && <Spinner />}
 
-      {isError && (
-        <ErrorMessage message="Could not load reviews." onRetry={refetch} />
-      )}
+      {isError && <ErrorMessage message="Could not load reviews." onRetry={refetch} />}
 
       {!isLoading && !isError && reviews && reviews.length === 0 && (
         <EmptyState
@@ -91,6 +95,7 @@ export default function ReviewList({ productId }: Props) {
               <div key={review.id}>
                 <p className={styles.formTitle}>Edit your review</p>
                 <ReviewForm
+                  key={editingReview.id}
                   productId={productId}
                   editing={editingReview}
                   onDone={() => setEditingReview(undefined)}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useGetCartQuery } from '../cart/cartApi'
 import { usePlaceOrderMutation } from './ordersApi'
@@ -46,8 +47,7 @@ export default function CheckoutPage() {
     }
   }, [cartItems, cartLoading, navigate])
 
-  const set = (key: keyof CheckoutFields, value: string) =>
-    setFields(f => ({ ...f, [key]: value }))
+  const set = (key: keyof CheckoutFields, value: string) => setFields(f => ({ ...f, [key]: value }))
 
   const subtotal = cartItems
     ? cartItems.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0)
@@ -56,7 +56,7 @@ export default function CheckoutPage() {
   const tax = subtotal * TAX_RATE
   const total = subtotal + shipping + tax
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const errs = validateCheckout(fields)
     setErrors(errs)

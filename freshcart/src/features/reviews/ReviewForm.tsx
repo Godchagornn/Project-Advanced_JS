@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import type { FormEvent } from 'react'
 import type { Review } from '../../types/models'
 import { useAddReviewMutation, useUpdateReviewMutation } from './reviewsApi'
 import { useAppDispatch } from '../../app/hooks'
@@ -18,33 +19,29 @@ interface Props {
 
 const EMPTY = { author: '', rating: 0, title: '', body: '' }
 
+function initialFields(editing?: Review) {
+  if (!editing) return EMPTY
+  return {
+    author: editing.author,
+    rating: editing.rating,
+    title: editing.title,
+    body: editing.body,
+  }
+}
+
 export default function ReviewForm({ productId, editing, onDone }: Props) {
   const dispatch = useAppDispatch()
   const [addReview, { isLoading: isAdding }] = useAddReviewMutation()
   const [updateReview, { isLoading: isUpdating }] = useUpdateReviewMutation()
   const isLoading = isAdding || isUpdating
 
-  const [fields, setFields] = useState(EMPTY)
+  const [fields, setFields] = useState(() => initialFields(editing))
   const [errors, setErrors] = useState<ReviewErrors>({})
-
-  useEffect(() => {
-    if (editing) {
-      setFields({
-        author: editing.author,
-        rating: editing.rating,
-        title: editing.title,
-        body: editing.body,
-      })
-    } else {
-      setFields(EMPTY)
-    }
-    setErrors({})
-  }, [editing])
 
   const set = (key: keyof typeof EMPTY, value: string | number) =>
     setFields(f => ({ ...f, [key]: value }))
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const errs = validateReview({ ...fields, rating: fields.rating })
     setErrors(errs)
@@ -58,6 +55,7 @@ export default function ReviewForm({ productId, editing, onDone }: Props) {
         await addReview({ productId, ...fields }).unwrap()
         dispatch(showToast({ message: 'Review submitted — thank you!', type: 'success' }))
         setFields(EMPTY)
+        setErrors({})
       }
       onDone?.()
     } catch {
@@ -102,7 +100,9 @@ export default function ReviewForm({ productId, editing, onDone }: Props) {
         </label>
         <textarea
           id="review-body"
-          className={[styles.textarea, errors.body ? styles.hasError : ''].filter(Boolean).join(' ')}
+          className={[styles.textarea, errors.body ? styles.hasError : '']
+            .filter(Boolean)
+            .join(' ')}
           placeholder="Tell others what you liked or didn't like…"
           value={fields.body}
           onChange={e => set('body', e.target.value)}

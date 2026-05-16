@@ -52,7 +52,12 @@ export default function RatingStars(props: Props) {
     <div className={wrapperClass}>
       <div className={styles.stars}>
         {stars.map(n => (
-          <span key={n} className={[styles.star, n <= Math.round(rating) ? styles.filled : styles.empty].join(' ')}>
+          <span
+            key={n}
+            className={[styles.star, n <= Math.round(rating) ? styles.filled : styles.empty].join(
+              ' '
+            )}
+          >
             ★
           </span>
         ))}

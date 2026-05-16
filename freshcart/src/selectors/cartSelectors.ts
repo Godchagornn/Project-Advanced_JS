@@ -8,10 +8,7 @@ const TAX_RATE = 0.07
 
 const selectCartResult = cartApi.endpoints.getCart.select()
 
-export const selectCartItems = createSelector(
-  selectCartResult,
-  result => result.data ?? []
-)
+export const selectCartItems = createSelector(selectCartResult, result => result.data ?? [])
 
 export const selectCartItemCount = createSelector(selectCartItems, items =>
   items.reduce((sum, item) => sum + item.quantity, 0)
@@ -25,10 +22,7 @@ export const selectCartShipping = createSelector(selectCartSubtotal, subtotal =>
   subtotal >= SHIPPING_THRESHOLD ? 0 : subtotal === 0 ? 0 : SHIPPING_COST
 )
 
-export const selectCartTax = createSelector(
-  selectCartSubtotal,
-  subtotal => subtotal * TAX_RATE
-)
+export const selectCartTax = createSelector(selectCartSubtotal, subtotal => subtotal * TAX_RATE)
 
 export const selectCartTotal = createSelector(
   selectCartSubtotal,

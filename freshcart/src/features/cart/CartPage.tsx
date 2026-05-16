@@ -47,9 +47,7 @@ export default function CartPage() {
         icon="🛒"
         title="Your cart is empty"
         description="Browse fresh picks and add items to your cart."
-        action={
-          <Button onClick={() => navigate('/products')}>Browse products</Button>
-        }
+        action={<Button onClick={() => navigate('/products')}>Browse products</Button>}
       />
     )
   }

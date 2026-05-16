@@ -8,7 +8,13 @@ interface Props {
   disabled?: boolean
 }
 
-export default function QuantityStepper({ value, min = 1, max = 99, onChange, disabled = false }: Props) {
+export default function QuantityStepper({
+  value,
+  min = 1,
+  max = 99,
+  onChange,
+  disabled = false,
+}: Props) {
   return (
     <div className={styles.stepper}>
       <button

@@ -10,21 +10,13 @@ export function validateRequired(value: string, fieldName: string): ValidationRe
   return value.trim().length > 0 ? ok() : fail(`${fieldName} is required.`)
 }
 
-export function validateMinLength(
-  value: string,
-  min: number,
-  fieldName: string
-): ValidationResult {
+export function validateMinLength(value: string, min: number, fieldName: string): ValidationResult {
   return value.trim().length >= min
     ? ok()
     : fail(`${fieldName} must be at least ${min} characters.`)
 }
 
-export function validateMaxLength(
-  value: string,
-  max: number,
-  fieldName: string
-): ValidationResult {
+export function validateMaxLength(value: string, max: number, fieldName: string): ValidationResult {
   return value.trim().length <= max ? ok() : fail(`${fieldName} must be at most ${max} characters.`)
 }
 

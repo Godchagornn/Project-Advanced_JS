@@ -32,9 +32,7 @@ export default function ProductDetailPage() {
         quantity: qty,
         unit: product.unit,
       }).unwrap()
-      dispatch(
-        showToast({ message: `${qty} × ${product.name} added to cart`, type: 'success' })
-      )
+      dispatch(showToast({ message: `${qty} × ${product.name} added to cart`, type: 'success' }))
       setQty(1)
     } catch {
       dispatch(showToast({ message: 'Failed to add to cart', type: 'error' }))

@@ -55,9 +55,7 @@ export default function OrderDetailPage() {
                     {formatPrice(item.unitPrice)} / {item.unit} × {item.quantity}
                   </p>
                 </div>
-                <p className={styles.itemPrice}>
-                  {formatPrice(item.unitPrice * item.quantity)}
-                </p>
+                <p className={styles.itemPrice}>{formatPrice(item.unitPrice * item.quantity)}</p>
               </div>
             ))}
           </div>
