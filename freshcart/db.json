@@ -261,8 +261,48 @@
       "origin": "Chiang Mai, Thailand"
     }
   ],
-  "cartItems": [],
-  "orders": [],
+  "cartItems": [
+    {
+      "productId": "9",
+      "name": "Baby Roma Tomatoes",
+      "imageUrl": "https://picsum.photos/seed/tomato/400/400",
+      "unitPrice": 69,
+      "quantity": 1,
+      "unit": "kg",
+      "id": "225331b0-1652-4a0f-b2f0-f112a3c65cce"
+    }
+  ],
+  "orders": [
+    {
+      "customerName": "Godchagorn Kitima",
+      "email": "pan.godchagorn2548@gmail.com",
+      "phone": "+66932431253",
+      "address": "15/7 wiang chiang rung",
+      "city": "Chiang rai",
+      "postalCode": "57350",
+      "paymentMethod": "cash",
+      "cardLast4": null,
+      "deliveryNotes": null,
+      "items": [
+        {
+          "productId": "9",
+          "name": "Baby Roma Tomatoes",
+          "imageUrl": "https://picsum.photos/seed/tomato/400/400",
+          "unitPrice": 69,
+          "quantity": 1,
+          "unit": "kg",
+          "id": "225331b0-1652-4a0f-b2f0-f112a3c65cce"
+        }
+      ],
+      "subtotal": 69,
+      "shipping": 50,
+      "tax": 4.83,
+      "total": 123.83,
+      "createdAt": "2026-05-16T10:00:24.052Z",
+      "status": "pending",
+      "id": "b1db87a4-2f0c-4d67-a554-147515d17ca3"
+    }
+  ],
   "reviews": [
     {
       "id": "r-1",
