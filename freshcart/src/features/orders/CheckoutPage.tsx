@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useGetCartQuery } from '../cart/cartApi'
+import { useGetCartQuery, useRemoveFromCartMutation } from '../cart/cartApi'
 import { usePlaceOrderMutation } from './ordersApi'
 import { useAppDispatch } from '../../app/hooks'
 import { showToast } from '../ui/uiSlice'
@@ -37,6 +37,7 @@ export default function CheckoutPage() {
   const dispatch = useAppDispatch()
   const { data: cartItems, isLoading: cartLoading, isError: cartError, refetch } = useGetCartQuery()
   const [placeOrder, { isLoading: isPlacing }] = usePlaceOrderMutation()
+  const [removeFromCart] = useRemoveFromCartMutation()
 
   const [fields, setFields] = useState<CheckoutFields>(EMPTY_FIELDS)
   const [errors, setErrors] = useState<CheckoutErrors>({})
@@ -80,6 +81,7 @@ export default function CheckoutPage() {
         tax,
         total,
       }).unwrap()
+      await Promise.all(cartItems.map(item => removeFromCart(item.id).unwrap()))
       dispatch(showToast({ message: 'Order placed successfully!', type: 'success' }))
       navigate(`/orders/${order.id}`)
     } catch {
