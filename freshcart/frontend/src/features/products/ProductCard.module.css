@@ -1,108 +1,181 @@
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.15s, transform 0.15s;
+  transition: transform var(--ease-normal), box-shadow var(--ease-normal), border-color var(--ease-normal);
+  animation: fadeInUp 0.4s ease both;
 }
 
 .card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: #bbf7d0;
 }
 
+/* Image area */
 .imageLink {
   display: block;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #f9fafb;
+  background: var(--color-primary-pale);
+  position: relative;
 }
 
 .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.25s;
+  transition: transform var(--ease-slow);
 }
 
 .card:hover .image {
-  transform: scale(1.04);
+  transform: scale(1.07);
 }
 
+/* Overlays */
+.outOfStockOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.badgeBestSeller {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  letter-spacing: 0.3px;
+}
+
+/* Body */
 .body {
-  padding: 14px;
+  padding: 14px 14px 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   flex: 1;
 }
 
 .category {
-  font-size: 0.72rem;
-  font-weight: 600;
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
-  color: var(--color-primary);
+  letter-spacing: 0.8px;
+  color: var(--color-primary-dark);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  width: fit-content;
 }
 
 .name {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
   color: var(--color-text);
   text-decoration: none;
-  line-height: 1.3;
+  line-height: 1.35;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: color var(--ease-fast);
 }
 
 .name:hover {
   color: var(--color-primary);
 }
 
-.meta {
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ratingNum {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #92400e;
+}
+
+/* Footer: price + cart button */
+.footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-top: 4px;
+  margin-top: auto;
 }
 
-.outOfStock {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-error);
+.cartBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #22c55e, #15803d);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform var(--ease-fast), box-shadow var(--ease-fast), background var(--ease-fast);
+  box-shadow: 0 2px 8px rgba(22,163,74,.35);
 }
 
-.footer {
-  padding: 0 14px 14px;
+.cartBtn:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(22,163,74,.45);
 }
 
-/* List view */
+.cartBtn:disabled {
+  background: #d1d5db;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ── List view ───────────────────────────────────────────── */
 .listCard {
   flex-direction: row;
   align-items: center;
+  border-radius: var(--radius-lg);
 }
 
 .listCard .imageLink {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   flex-shrink: 0;
   aspect-ratio: unset;
+  border-radius: 0;
 }
 
 .listCard .body {
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px 16px;
+  gap: 8px 20px;
+  flex: 1;
 }
 
 .listCard .footer {
-  padding: 14px;
-  margin-left: auto;
+  margin-top: 0;
   flex-shrink: 0;
+  gap: 12px;
 }

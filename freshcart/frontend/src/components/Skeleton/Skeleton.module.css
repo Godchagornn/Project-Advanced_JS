@@ -1,37 +1,42 @@
 .skeleton {
-  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.4s infinite;
-  border-radius: var(--radius-md);
+  background: linear-gradient(
+    90deg,
+    #e5e7eb 0%,
+    #f0fdf4 30%,
+    #dcfce7 50%,
+    #f0fdf4 70%,
+    #e5e7eb 100%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  border-radius: var(--radius-lg);
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
 }
 
 .card {
-  height: 280px;
+  height: 300px;
   width: 100%;
+  border-radius: var(--radius-xl);
 }
 
 .text {
-  height: 16px;
+  height: 14px;
   width: 100%;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
 }
 
 .title {
-  height: 24px;
-  width: 60%;
-  border-radius: var(--radius-sm);
+  height: 22px;
+  width: 55%;
+  border-radius: var(--radius-full);
 }
 
 .image {
-  height: 180px;
+  height: 220px;
   width: 100%;
+  border-radius: var(--radius-xl);
 }

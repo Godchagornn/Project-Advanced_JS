@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { format } from 'date-fns'
+import { ArrowLeft, Package, Clock, CheckCircle, CreditCard, Banknote } from 'lucide-react'
 import { useGetOrderByIdQuery } from './ordersApi'
 import { formatPrice } from '../../utils/formatPrice'
 import type { OrderStatus } from '../../types/models'
@@ -7,10 +8,10 @@ import Spinner from '../../components/Spinner/Spinner'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import styles from './OrderDetailPage.module.css'
 
-const STATUS_LABELS: Record<OrderStatus, string> = {
-  pending: '🕐 Pending',
-  confirmed: '✅ Confirmed',
-  delivered: '📦 Delivered',
+const STATUS_CONFIG: Record<OrderStatus, { label: string; icon: typeof Clock; className: string }> = {
+  pending:   { label: 'Pending',   icon: Clock,       className: 'pending' },
+  confirmed: { label: 'Confirmed', icon: CheckCircle, className: 'confirmed' },
+  delivered: { label: 'Delivered', icon: Package,     className: 'delivered' },
 }
 
 export default function OrderDetailPage() {
@@ -23,10 +24,13 @@ export default function OrderDetailPage() {
     return <ErrorMessage message="Could not load this order." onRetry={refetch} />
   }
 
+  const cfg = STATUS_CONFIG[order.status]
+  const Icon = cfg.icon
+
   return (
-    <div>
+    <div className={styles.page}>
       <Link to="/orders" className={styles.back}>
-        ← Back to orders
+        <ArrowLeft size={16} strokeWidth={2.5} /> Back to orders
       </Link>
 
       <div className={styles.header}>
@@ -36,8 +40,9 @@ export default function OrderDetailPage() {
             Placed on {format(new Date(order.createdAt), 'dd MMMM yyyy')}
           </h1>
         </div>
-        <span className={[styles.status, styles[order.status]].join(' ')}>
-          {STATUS_LABELS[order.status]}
+        <span className={[styles.status, styles[cfg.className]].join(' ')}>
+          <Icon size={14} strokeWidth={2.5} />
+          {cfg.label}
         </span>
       </div>
 
@@ -45,7 +50,7 @@ export default function OrderDetailPage() {
         <div>
           {/* Items */}
           <div className={styles.section}>
-            <p className={styles.sectionTitle}>Items ordered</p>
+            <p className={styles.sectionTitle}>🛒 Items Ordered</p>
             {order.items.map(item => (
               <div key={item.id} className={styles.itemRow}>
                 <img src={item.imageUrl} alt={item.name} className={styles.itemImg} />
@@ -62,7 +67,7 @@ export default function OrderDetailPage() {
 
           {/* Customer info */}
           <div className={styles.section}>
-            <p className={styles.sectionTitle}>Delivery details</p>
+            <p className={styles.sectionTitle}>📍 Delivery Details</p>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Name</span>
@@ -79,9 +84,11 @@ export default function OrderDetailPage() {
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Payment</span>
                 <span className={styles.infoValue}>
-                  {order.paymentMethod === 'card'
-                    ? `Card ending ···· ${order.cardLast4}`
-                    : 'Cash on delivery'}
+                  <span className={styles.paymentChip}>
+                    {order.paymentMethod === 'card'
+                      ? <><CreditCard size={13} /> Card ···· {order.cardLast4}</>
+                      : <><Banknote size={13} /> Cash on delivery</>}
+                  </span>
                 </span>
               </div>
               <div className={styles.infoItem} style={{ gridColumn: '1 / -1' }}>
@@ -92,7 +99,7 @@ export default function OrderDetailPage() {
               </div>
               {order.deliveryNotes && (
                 <div className={styles.infoItem} style={{ gridColumn: '1 / -1' }}>
-                  <span className={styles.infoLabel}>Delivery notes</span>
+                  <span className={styles.infoLabel}>Delivery Notes</span>
                   <span className={styles.infoValue}>{order.deliveryNotes}</span>
                 </div>
               )}
@@ -102,7 +109,7 @@ export default function OrderDetailPage() {
 
         {/* Price summary */}
         <div className={styles.section}>
-          <p className={styles.sectionTitle}>Payment summary</p>
+          <p className={styles.sectionTitle}>💰 Payment Summary</p>
 
           <div className={styles.summaryRow}>
             <span>Subtotal</span>

@@ -1,48 +1,72 @@
 .form {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-xl);
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--ease-fast);
+}
+
+.form:focus-within {
+  border-color: #a7f3d0;
 }
 
 .ratingField {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .ratingLabel {
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 700;
   color: var(--color-text);
 }
 
 .ratingError {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--color-error);
+  font-weight: 500;
+}
+
+/* Textarea */
+.fieldWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldLabel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text);
 }
 
 .textarea {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  padding: 11px 16px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
   font-size: 0.9rem;
   color: var(--color-text);
   background: var(--color-surface);
   resize: vertical;
-  min-height: 100px;
+  min-height: 110px;
   font-family: inherit;
   outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color var(--ease-fast), box-shadow var(--ease-fast);
+}
+
+.textarea::placeholder {
+  color: var(--color-text-light);
 }
 
 .textarea:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgb(46 125 50 / 0.15);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
 }
 
 .textarea.hasError {
@@ -50,27 +74,17 @@
 }
 
 .charCount {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--color-text-muted);
   text-align: right;
-  margin-top: -10px;
-}
-
-.fieldWrap {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.fieldLabel {
-  font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-text);
+  margin-top: -4px;
 }
 
 .fieldError {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--color-error);
+  font-weight: 500;
 }
 
 .actions {

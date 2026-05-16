@@ -1,29 +1,57 @@
 .section {
-  margin-top: 8px;
+  margin-top: 12px;
+  animation: fadeIn 0.4s ease both;
 }
 
 .sectionTitle {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 20px;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 24px;
   color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: -0.3px;
+}
+
+.reviewCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 8px;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
 .list {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
+/* Review card */
 .card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 18px 20px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  transition: border-color var(--ease-fast), box-shadow var(--ease-fast);
+  animation: fadeInUp 0.4s ease both;
+}
+
+.card:hover {
+  border-color: #bbf7d0;
+  box-shadow: var(--shadow-md);
 }
 
 .cardHeader {
@@ -33,19 +61,47 @@
   gap: 12px;
 }
 
+.authorRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Avatar circle */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(22,163,74,.25);
+}
+
 .author {
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--color-text);
+  margin-bottom: 3px;
 }
 
 .date {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--color-text-muted);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .reviewTitle {
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-weight: 700;
   font-size: 0.95rem;
   color: var(--color-text);
 }
@@ -53,7 +109,7 @@
 .body {
   font-size: 0.9rem;
   color: var(--color-text-muted);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .actions {
@@ -63,14 +119,17 @@
 }
 
 .actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   background: none;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 4px 10px;
-  font-size: 0.78rem;
-  font-weight: 600;
+  border-radius: var(--radius-full);
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: all var(--ease-fast);
 }
 
 .editBtn {
@@ -78,7 +137,8 @@
 }
 
 .editBtn:hover {
-  background: #f0fdf4;
+  background: var(--color-primary-light);
+  border-color: var(--color-primary-light);
 }
 
 .deleteBtn {
@@ -87,11 +147,20 @@
 
 .deleteBtn:hover {
   background: #fef2f2;
+  border-color: #fecaca;
+}
+
+/* Write / Edit form wrapper */
+.writeReviewWrap,
+.editWrap {
+  margin-top: 8px;
 }
 
 .formTitle {
+  font-family: var(--font-heading);
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 16px;
   color: var(--color-text);
+  letter-spacing: -0.2px;
 }

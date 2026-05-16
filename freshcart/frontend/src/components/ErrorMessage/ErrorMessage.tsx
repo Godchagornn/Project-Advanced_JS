@@ -12,7 +12,7 @@ export default function ErrorMessage({
 }: Props) {
   return (
     <div className={styles.wrapper}>
-      <span className={styles.icon}>⚠️</span>
+      <div className={styles.iconWrap}>⚠️</div>
       <p className={styles.title}>Oops!</p>
       <p className={styles.message}>{message}</p>
       {onRetry && (

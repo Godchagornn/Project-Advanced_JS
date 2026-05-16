@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { Trash2, ArrowRight, ShoppingBag } from 'lucide-react'
 import { useGetCartQuery, useUpdateCartItemMutation } from './cartApi'
 import { useAppDispatch } from '../../app/hooks'
 import { openConfirmDialog } from '../ui/uiSlice'
@@ -56,12 +57,19 @@ export default function CartPage() {
   const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
   const tax = subtotal * TAX_RATE
   const total = subtotal + shipping + tax
+  const shippingProgress = Math.min((subtotal / SHIPPING_THRESHOLD) * 100, 100)
 
   return (
-    <div>
-      <h1 className={styles.title}>Your cart</h1>
+    <div className={styles.pageWrap}>
+      {/* Header */}
+      <div className={styles.pageHeader}>
+        <h1 className={styles.title}>
+          Your Cart <span className={styles.countBadge}>{cartItems.length}</span>
+        </h1>
+      </div>
 
       <div className={styles.page}>
+        {/* Items */}
         <div className={styles.itemList}>
           {cartItems.map(item => (
             <div key={item.id} className={styles.item}>
@@ -90,19 +98,39 @@ export default function CartPage() {
                   type="button"
                   className={styles.removeBtn}
                   onClick={() => handleRemove(item.id, item.name)}
+                  aria-label={`Remove ${item.name}`}
                 >
-                  Remove
+                  <Trash2 size={15} strokeWidth={2} />
                 </button>
               </div>
             </div>
           ))}
+
+          {/* Free shipping progress */}
+          {shipping > 0 && (
+            <div className={styles.shippingProgress}>
+              <p className={styles.shippingMsg}>
+                🎉 Add <strong>{formatPrice(SHIPPING_THRESHOLD - subtotal)}</strong> more for free delivery!
+              </p>
+              <div className={styles.progressBar}>
+                <div className={styles.progressFill} style={{ width: `${shippingProgress}%` }} />
+              </div>
+              <div className={styles.progressLabels}>
+                <span>฿0</span>
+                <span>฿{SHIPPING_THRESHOLD}</span>
+              </div>
+            </div>
+          )}
         </div>
 
+        {/* Summary sidebar */}
         <div className={styles.summary}>
-          <p className={styles.summaryTitle}>Order summary</p>
+          <p className={styles.summaryTitle}>
+            <ShoppingBag size={18} /> Order Summary
+          </p>
 
           <div className={styles.summaryRow}>
-            <span>Subtotal</span>
+            <span>Subtotal ({cartItems.length} items)</span>
             <span>{formatPrice(subtotal)}</span>
           </div>
 
@@ -114,14 +142,6 @@ export default function CartPage() {
               <span>{formatPrice(shipping)}</span>
             )}
           </div>
-
-          {shipping > 0 && (
-            <div className={styles.summaryRow}>
-              <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
-                Add {formatPrice(SHIPPING_THRESHOLD - subtotal)} more for free shipping
-              </span>
-            </div>
-          )}
 
           <div className={styles.summaryRow}>
             <span>VAT (7%)</span>
@@ -136,14 +156,20 @@ export default function CartPage() {
           </div>
 
           <Button fullWidth size="lg" onClick={() => navigate('/checkout')}>
-            Proceed to checkout
+            Proceed to Checkout <ArrowRight size={16} strokeWidth={2.5} />
           </Button>
 
           <Link to="/products">
             <Button fullWidth variant="ghost" size="sm">
-              Continue shopping
+              Continue Shopping
             </Button>
           </Link>
+
+          {/* Trust */}
+          <div className={styles.trustMini}>
+            <span>🔒 Secure payment</span>
+            <span>🌿 Fresh guarantee</span>
+          </div>
         </div>
       </div>
     </div>

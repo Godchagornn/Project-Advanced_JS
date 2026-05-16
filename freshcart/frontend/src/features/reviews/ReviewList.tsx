@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { format } from 'date-fns'
+import { Edit2, Trash2 } from 'lucide-react'
 import type { Review } from '../../types/models'
 import { useGetReviewsByProductQuery } from './reviewsApi'
 import { useAppDispatch } from '../../app/hooks'
@@ -35,12 +36,22 @@ function ReviewCard({
     )
   }
 
+  const initials = review.author
+    .split(' ')
+    .map(n => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2)
+
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
-        <div>
-          <p className={styles.author}>{review.author}</p>
-          <RatingStars rating={review.rating} size="sm" />
+        <div className={styles.authorRow}>
+          <div className={styles.avatar}>{initials}</div>
+          <div>
+            <p className={styles.author}>{review.author}</p>
+            <RatingStars rating={review.rating} size="sm" />
+          </div>
         </div>
         <span className={styles.date}>{format(new Date(review.createdAt), 'dd MMM yyyy')}</span>
       </div>
@@ -52,14 +63,14 @@ function ReviewCard({
           className={[styles.actionBtn, styles.editBtn].join(' ')}
           onClick={() => onEdit(review)}
         >
-          Edit
+          <Edit2 size={13} strokeWidth={2.5} /> Edit
         </button>
         <button
           type="button"
           className={[styles.actionBtn, styles.deleteBtn].join(' ')}
           onClick={handleDelete}
         >
-          Delete
+          <Trash2 size={13} strokeWidth={2.5} /> Delete
         </button>
       </div>
     </div>
@@ -73,7 +84,10 @@ export default function ReviewList({ productId }: Props) {
   return (
     <div className={styles.section}>
       <h2 className={styles.sectionTitle}>
-        Customer reviews {reviews && reviews.length > 0 ? `(${reviews.length})` : ''}
+        Customer Reviews{' '}
+        {reviews && reviews.length > 0 && (
+          <span className={styles.reviewCount}>{reviews.length}</span>
+        )}
       </h2>
 
       {isLoading && <Spinner />}
@@ -92,7 +106,7 @@ export default function ReviewList({ productId }: Props) {
         <div className={styles.list}>
           {reviews.map(review =>
             editingReview?.id === review.id ? (
-              <div key={review.id}>
+              <div key={review.id} className={styles.editWrap}>
                 <p className={styles.formTitle}>Edit your review</p>
                 <ReviewForm
                   key={editingReview.id}
@@ -114,10 +128,10 @@ export default function ReviewList({ productId }: Props) {
       )}
 
       {!editingReview && (
-        <>
-          <p className={styles.formTitle}>Write a review</p>
+        <div className={styles.writeReviewWrap}>
+          <p className={styles.formTitle}>Write a Review</p>
           <ReviewForm productId={productId} />
-        </>
+        </div>
       )}
     </div>
   )

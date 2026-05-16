@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { ArrowLeft, ShieldCheck, Truck, Leaf } from 'lucide-react'
 import { useGetProductByIdQuery } from './productsApi'
 import { useAddToCartMutation } from '../cart/cartApi'
 import { useAppDispatch } from '../../app/hooks'
@@ -43,8 +44,8 @@ export default function ProductDetailPage() {
     return (
       <div>
         <Skeleton variant="text" width="120px" height="20px" />
-        <div className={styles.layout} style={{ marginTop: 20 }}>
-          <Skeleton variant="image" height="400px" />
+        <div className={styles.layout} style={{ marginTop: 24 }}>
+          <Skeleton variant="image" height="420px" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <Skeleton variant="title" />
             <Skeleton variant="text" />
@@ -66,16 +67,20 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div>
+    <div className={styles.page}>
+      {/* Breadcrumb */}
       <Link to="/products" className={styles.back}>
-        ← Back to products
+        <ArrowLeft size={16} strokeWidth={2.5} /> Back to products
       </Link>
 
       <div className={styles.layout}>
+        {/* Left: image */}
         <div className={styles.imageWrap}>
           <img src={product.imageUrl} alt={product.name} className={styles.image} />
+          <div className={styles.imgOverlay} aria-hidden="true" />
         </div>
 
+        {/* Right: info */}
         <div className={styles.info}>
           <span className={styles.category}>{product.category}</span>
           <h1 className={styles.name}>{product.name}</h1>
@@ -91,17 +96,18 @@ export default function ProductDetailPage() {
 
           <p className={styles.description}>{product.description}</p>
 
+          {/* Meta grid */}
           <div className={styles.meta}>
             <div className={styles.metaRow}>
-              <span className={styles.metaLabel}>Origin</span>
+              <span className={styles.metaLabel}>📍 Origin</span>
               <span className={styles.metaValue}>{product.origin}</span>
             </div>
             <div className={styles.metaRow}>
-              <span className={styles.metaLabel}>Unit</span>
+              <span className={styles.metaLabel}>📦 Unit</span>
               <span className={styles.metaValue}>per {product.unit}</span>
             </div>
             <div className={styles.metaRow}>
-              <span className={styles.metaLabel}>Availability</span>
+              <span className={styles.metaLabel}>🏷️ Stock</span>
               <span
                 className={[
                   styles.stockBadge,
@@ -126,16 +132,32 @@ export default function ProductDetailPage() {
                 disabled={isAdding}
               />
               <Button onClick={handleAddToCart} disabled={isAdding} size="lg">
-                {isAdding ? 'Adding…' : 'Add to cart'}
+                {isAdding ? 'Adding…' : '🛒 Add to cart'}
               </Button>
             </div>
           )}
 
           {!product.inStock && (
-            <p style={{ color: 'var(--color-error)', fontWeight: 600 }}>
+            <p className={styles.outOfStockMsg}>
               This item is currently out of stock.
             </p>
           )}
+
+          {/* Trust badges */}
+          <div className={styles.trustRow}>
+            <div className={styles.trustItem}>
+              <Leaf size={16} className={styles.trustIcon} />
+              <span>100% Fresh</span>
+            </div>
+            <div className={styles.trustItem}>
+              <ShieldCheck size={16} className={styles.trustIcon} />
+              <span>Secure Payment</span>
+            </div>
+            <div className={styles.trustItem}>
+              <Truck size={16} className={styles.trustIcon} />
+              <span>Fast Delivery</span>
+            </div>
+          </div>
         </div>
       </div>
 

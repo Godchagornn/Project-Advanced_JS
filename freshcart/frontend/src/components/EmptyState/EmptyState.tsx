@@ -11,7 +11,7 @@ interface Props {
 export default function EmptyState({ icon = '📭', title, description, action }: Props) {
   return (
     <div className={styles.wrapper}>
-      <span className={styles.icon}>{icon}</span>
+      <div className={styles.iconWrap}>{icon}</div>
       <p className={styles.title}>{title}</p>
       {description && <p className={styles.description}>{description}</p>}
       {action}

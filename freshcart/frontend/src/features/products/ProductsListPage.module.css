@@ -1,34 +1,50 @@
 .header {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+  animation: fadeInUp 0.5s ease both;
 }
 
-.title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--color-text);
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-primary);
   margin-bottom: 4px;
 }
 
-.subtitle {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 900;
+  color: var(--color-text);
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
 }
 
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Toolbar */
 .toolbar {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   align-items: flex-end;
   margin-bottom: 20px;
-  padding: 16px;
+  padding: 16px 20px;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  animation: fadeInUp 0.5s ease 0.1s both;
 }
 
 .searchWrap {
   flex: 1;
-  min-width: 200px;
+  min-width: 220px;
 }
 
 .filters {
@@ -38,21 +54,25 @@
   align-items: flex-end;
 }
 
+/* View toggle */
 .viewToggle {
   display: flex;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
 .viewBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   background: none;
   border: none;
-  padding: 9px 12px;
   cursor: pointer;
-  font-size: 1rem;
   color: var(--color-text-muted);
-  transition: background 0.15s, color 0.15s;
+  transition: background var(--ease-fast), color var(--ease-fast);
 }
 
 .viewBtn.active {
@@ -61,19 +81,22 @@
 }
 
 .viewBtn:hover:not(.active) {
-  background: var(--color-border);
+  background: var(--color-primary-pale);
+  color: var(--color-primary);
 }
 
+/* Stock toggle */
 .stockToggle {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-text);
   cursor: pointer;
   white-space: nowrap;
-  padding: 9px 4px;
+  padding: 8px 4px;
+  user-select: none;
 }
 
 .stockToggle input {
@@ -83,15 +106,25 @@
   cursor: pointer;
 }
 
+/* Results bar */
 .resultsBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
-  font-size: 0.875rem;
+  margin-bottom: 18px;
+  animation: fadeIn 0.3s ease both;
+}
+
+.resultCount {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.83rem;
+  font-weight: 600;
   color: var(--color-text-muted);
 }
 
+/* Grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -110,6 +143,7 @@
   gap: 20px;
 }
 
+/* Responsive */
 @media (max-width: 1100px) {
   .grid,
   .skeletonGrid {
@@ -125,7 +159,8 @@
   }
 
   .toolbar {
-    gap: 8px;
+    padding: 14px 16px;
+    gap: 10px;
   }
 }
 
@@ -133,5 +168,6 @@
   .grid,
   .skeletonGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 }

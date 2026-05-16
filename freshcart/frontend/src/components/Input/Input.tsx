@@ -1,16 +1,13 @@
-import type { InputHTMLAttributes } from 'react'
+import type { InputHTMLAttributes, ReactNode } from 'react'
 import styles from './Input.module.css'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
   error?: string
+  icon?: ReactNode
 }
 
-export default function Input({ label, error, id, className = '', ...rest }: Props) {
-  const inputClass = [styles.input, error ? styles.hasError : '', className]
-    .filter(Boolean)
-    .join(' ')
-
+export default function Input({ label, error, icon, id, className = '', ...rest }: Props) {
   return (
     <div className={styles.wrapper}>
       {label && (
@@ -18,7 +15,16 @@ export default function Input({ label, error, id, className = '', ...rest }: Pro
           {label}
         </label>
       )}
-      <input id={id} className={inputClass} {...rest} />
+      <div className={styles.inputWrap}>
+        {icon && <span className={styles.icon}>{icon}</span>}
+        <input
+          id={id}
+          className={[styles.input, error ? styles.hasError : '', icon ? styles.withIcon : '', className]
+            .filter(Boolean)
+            .join(' ')}
+          {...rest}
+        />
+      </div>
       {error && <span className={styles.error}>{error}</span>}
     </div>
   )

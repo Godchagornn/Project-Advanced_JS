@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { Search, SlidersHorizontal, LayoutGrid, List } from 'lucide-react'
 import { useGetProductsQuery } from './productsApi'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
@@ -22,16 +23,16 @@ import styles from './ProductsListPage.module.css'
 
 const CATEGORY_OPTIONS = [
   { value: 'all', label: 'All categories' },
-  { value: 'fruits', label: 'Fruits' },
-  { value: 'vegetables', label: 'Vegetables' },
-  { value: 'herbs', label: 'Herbs' },
+  { value: 'fruits', label: '🍎 Fruits' },
+  { value: 'vegetables', label: '🥦 Vegetables' },
+  { value: 'herbs', label: '🌿 Herbs' },
 ]
 
 const SORT_OPTIONS = [
   { value: 'name', label: 'Name (A–Z)' },
-  { value: 'priceAsc', label: 'Price: low to high' },
-  { value: 'priceDesc', label: 'Price: high to low' },
-  { value: 'ratingDesc', label: 'Top rated' },
+  { value: 'priceAsc', label: 'Price: low → high' },
+  { value: 'priceDesc', label: 'Price: high → low' },
+  { value: 'ratingDesc', label: '⭐ Top rated' },
 ]
 
 export default function ProductsListPage() {
@@ -39,7 +40,6 @@ export default function ProductsListPage() {
   const [searchParams] = useSearchParams()
   const { search, category, sortBy, inStockOnly, viewMode } = useAppSelector(s => s.filters)
 
-  // Local input value debounced before hitting Redux so the selector stays efficient
   const [localSearch, setLocalSearch] = useState(search)
   const debouncedSearch = useDebounce(localSearch, 300)
 
@@ -50,7 +50,6 @@ export default function ProductsListPage() {
     dispatch(setSearch(debouncedSearch))
   }, [debouncedSearch, dispatch])
 
-  // Sync ?category= query param from HomePage links
   useEffect(() => {
     const cat = searchParams.get('category') as CategoryFilter | null
     if (cat && ['fruits', 'vegetables', 'herbs'].includes(cat)) {
@@ -60,18 +59,24 @@ export default function ProductsListPage() {
 
   return (
     <div>
+      {/* Page header */}
       <div className={styles.header}>
-        <h1 className={styles.title}>Fresh Produce</h1>
-        <p className={styles.subtitle}>Sourced daily from local farms</p>
+        <div>
+          <p className={styles.eyebrow}>Our Collection</p>
+          <h1 className={styles.title}>Fresh Produce</h1>
+          <p className={styles.subtitle}>Sourced daily from local farms — always fresh, always seasonal.</p>
+        </div>
       </div>
 
+      {/* Toolbar */}
       <div className={styles.toolbar}>
         <div className={styles.searchWrap}>
           <Input
-            placeholder="Search fruits, vegetables…"
+            placeholder="Search fruits, vegetables, herbs…"
             value={localSearch}
             onChange={e => setLocalSearch(e.target.value)}
             aria-label="Search products"
+            icon={<Search size={16} />}
           />
         </div>
 
@@ -108,7 +113,7 @@ export default function ProductsListPage() {
               onClick={() => dispatch(setViewMode('grid'))}
               aria-label="Grid view"
             >
-              ⊞
+              <LayoutGrid size={16} />
             </button>
             <button
               type="button"
@@ -118,7 +123,7 @@ export default function ProductsListPage() {
               onClick={() => dispatch(setViewMode('list'))}
               aria-label="List view"
             >
-              ☰
+              <List size={16} />
             </button>
           </div>
         </div>
@@ -126,7 +131,8 @@ export default function ProductsListPage() {
 
       {!isLoading && !isError && (
         <div className={styles.resultsBar}>
-          <span>
+          <span className={styles.resultCount}>
+            <SlidersHorizontal size={14} />
             {filtered.length} {filtered.length === 1 ? 'product' : 'products'} found
           </span>
         </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Check, CreditCard, Banknote } from 'lucide-react'
 import { useGetCartQuery, useRemoveFromCartMutation } from '../cart/cartApi'
 import { usePlaceOrderMutation } from './ordersApi'
 import { useAppDispatch } from '../../app/hooks'
@@ -31,6 +32,8 @@ const EMPTY_FIELDS: CheckoutFields = {
   cardLast4: '',
   deliveryNotes: '',
 }
+
+const STEPS = ['Information', 'Payment', 'Confirm']
 
 export default function CheckoutPage() {
   const navigate = useNavigate()
@@ -103,14 +106,27 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div>
+    <div className={styles.pageWrap}>
+      {/* Step indicator */}
+      <div className={styles.steps}>
+        {STEPS.map((step, i) => (
+          <div key={step} className={styles.stepItem}>
+            <div className={[styles.stepCircle, i === 0 ? styles.stepActive : ''].join(' ')}>
+              {i === 0 ? <span>1</span> : <span>{i + 1}</span>}
+            </div>
+            <span className={styles.stepLabel}>{step}</span>
+            {i < STEPS.length - 1 && <div className={styles.stepLine} />}
+          </div>
+        ))}
+      </div>
+
       <h1 className={styles.title}>Checkout</h1>
 
       <div className={styles.page}>
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
           {/* Contact info */}
           <div className={styles.section}>
-            <p className={styles.sectionTitle}>Contact information</p>
+            <p className={styles.sectionTitle}>📋 Contact Information</p>
             <Input
               id="customerName"
               label="Full name"
@@ -118,6 +134,7 @@ export default function CheckoutPage() {
               onChange={e => set('customerName', e.target.value)}
               error={errors.customerName}
               autoComplete="name"
+              placeholder="Your full name"
             />
             <div className={styles.row2}>
               <Input
@@ -128,6 +145,7 @@ export default function CheckoutPage() {
                 onChange={e => set('email', e.target.value)}
                 error={errors.email}
                 autoComplete="email"
+                placeholder="you@email.com"
               />
               <Input
                 id="phone"
@@ -137,13 +155,14 @@ export default function CheckoutPage() {
                 onChange={e => set('phone', e.target.value)}
                 error={errors.phone}
                 autoComplete="tel"
+                placeholder="08x-xxx-xxxx"
               />
             </div>
           </div>
 
           {/* Delivery */}
           <div className={styles.section}>
-            <p className={styles.sectionTitle}>Delivery address</p>
+            <p className={styles.sectionTitle}>📍 Delivery Address</p>
             <Input
               id="address"
               label="Address"
@@ -151,6 +170,7 @@ export default function CheckoutPage() {
               onChange={e => set('address', e.target.value)}
               error={errors.address}
               autoComplete="street-address"
+              placeholder="House no., street, district"
             />
             <div className={styles.row2}>
               <Input
@@ -160,6 +180,7 @@ export default function CheckoutPage() {
                 onChange={e => set('city', e.target.value)}
                 error={errors.city}
                 autoComplete="address-level2"
+                placeholder="Bangkok"
               />
               <Input
                 id="postalCode"
@@ -169,22 +190,16 @@ export default function CheckoutPage() {
                 error={errors.postalCode}
                 autoComplete="postal-code"
                 maxLength={5}
+                placeholder="10100"
               />
             </div>
             <div>
-              <label
-                style={{
-                  fontSize: '0.875rem',
-                  fontWeight: 500,
-                  display: 'block',
-                  marginBottom: 4,
-                }}
-              >
-                Delivery notes (optional)
+              <label className={styles.textareaLabel}>
+                Delivery notes <span className={styles.optional}>(optional)</span>
               </label>
               <textarea
                 className={styles.textarea}
-                placeholder="E.g. Leave at the door, call on arrival…"
+                placeholder="e.g. Leave at the door, call on arrival…"
                 value={fields.deliveryNotes}
                 onChange={e => set('deliveryNotes', e.target.value)}
               />
@@ -193,7 +208,7 @@ export default function CheckoutPage() {
 
           {/* Payment */}
           <div className={styles.section}>
-            <p className={styles.sectionTitle}>Payment method</p>
+            <p className={styles.sectionTitle}>💳 Payment Method</p>
             <div className={styles.paymentOptions}>
               <button
                 type="button"
@@ -205,7 +220,9 @@ export default function CheckoutPage() {
                   .join(' ')}
                 onClick={() => set('paymentMethod', 'cash')}
               >
-                💵 Cash on delivery
+                <Banknote size={20} strokeWidth={2} />
+                Cash on Delivery
+                {fields.paymentMethod === 'cash' && <Check size={16} className={styles.checkIcon} />}
               </button>
               <button
                 type="button"
@@ -217,13 +234,13 @@ export default function CheckoutPage() {
                   .join(' ')}
                 onClick={() => set('paymentMethod', 'card')}
               >
-                💳 Card (mock)
+                <CreditCard size={20} strokeWidth={2} />
+                Card (mock)
+                {fields.paymentMethod === 'card' && <Check size={16} className={styles.checkIcon} />}
               </button>
             </div>
             {errors.paymentMethod && (
-              <span style={{ fontSize: '0.8rem', color: 'var(--color-error)' }}>
-                {errors.paymentMethod}
-              </span>
+              <span className={styles.fieldError}>{errors.paymentMethod}</span>
             )}
 
             {fields.paymentMethod === 'card' && (
@@ -234,19 +251,19 @@ export default function CheckoutPage() {
                 onChange={e => set('cardLast4', e.target.value)}
                 error={errors.cardLast4}
                 maxLength={4}
-                placeholder="e.g. 4242"
+                placeholder="4242"
               />
             )}
           </div>
 
           <Button type="submit" size="lg" fullWidth disabled={isPlacing}>
-            {isPlacing ? 'Placing order…' : `Place order — ${formatPrice(total)}`}
+            {isPlacing ? 'Placing order…' : `Place Order — ${formatPrice(total)}`}
           </Button>
         </form>
 
         {/* Order summary sidebar */}
         <div className={styles.summary}>
-          <p className={styles.summaryTitle}>Order summary</p>
+          <p className={styles.summaryTitle}>Order Summary</p>
 
           <div className={styles.summaryItems}>
             {cartItems.map(item => (
@@ -285,6 +302,10 @@ export default function CheckoutPage() {
           <div className={styles.summaryTotal}>
             <span>Total</span>
             <span>{formatPrice(total)}</span>
+          </div>
+
+          <div className={styles.securityBadge}>
+            🔒 SSL Secured &amp; Encrypted
           </div>
         </div>
       </div>

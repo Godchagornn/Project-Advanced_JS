@@ -1,5 +1,70 @@
-/* Global reset and base styles only — component styles live in *.module.css */
+/* ─── Tailwind directives ─────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* ─── Design Tokens ───────────────────────────────────── */
+:root {
+  /* Brand greens */
+  --color-primary:       #16a34a;
+  --color-primary-dark:  #15803d;
+  --color-primary-light: #dcfce7;
+  --color-primary-pale:  #f0fdf4;
+
+  /* Accents */
+  --color-secondary:       #fb923c;
+  --color-secondary-light: #fff7ed;
+  --color-accent-yellow:   #facc15;
+
+  /* Neutrals */
+  --color-bg:          #f8fffe;
+  --color-surface:     #ffffff;
+  --color-surface-alt: #f0fdf4;
+  --color-border:      #e5e7eb;
+  --color-border-light:#d1fae5;
+
+  /* Text */
+  --color-text:       #111827;
+  --color-text-muted: #6b7280;
+  --color-text-light: #9ca3af;
+
+  /* Semantic */
+  --color-error:   #dc2626;
+  --color-success: #16a34a;
+  --color-info:    #2563eb;
+  --color-warning: #d97706;
+
+  /* Footer */
+  --color-forest: #14532d;
+
+  /* Border radii */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-full: 9999px;
+
+  /* Layered shadows */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.09), 0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.05);
+  --shadow-xl: 0 20px 50px rgba(0,0,0,.12), 0 8px 16px rgba(0,0,0,.06);
+  --shadow-green: 0 4px 20px rgba(22,163,74,.30);
+  --shadow-green-lg: 0 8px 30px rgba(22,163,74,.35);
+
+  /* Transitions */
+  --ease-fast:   150ms cubic-bezier(.4,0,.2,1);
+  --ease-normal: 250ms cubic-bezier(.4,0,.2,1);
+  --ease-slow:   400ms cubic-bezier(.4,0,.2,1);
+
+  /* Typography */
+  --font-heading: 'Poppins', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+}
+
+/* ─── Base Reset ──────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -8,43 +73,18 @@
   padding: 0;
 }
 
-:root {
-  --color-primary: #2e7d32;
-  --color-primary-dark: #1b5e20;
-  --color-primary-light: #4caf50;
-  --color-secondary: #f57c00;
-  --color-secondary-light: #ffb74d;
+html {
+  scroll-behavior: smooth;
+}
 
-  --color-bg: #f9fafb;
-  --color-surface: #ffffff;
-  --color-border: #e5e7eb;
-  --color-text: #111827;
-  --color-text-muted: #6b7280;
-  --color-error: #dc2626;
-  --color-success: #16a34a;
-  --color-info: #2563eb;
-
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-full: 9999px;
-
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px rgb(0 0 0 / 0.07), 0 1px 3px rgb(0 0 0 / 0.06);
-  --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.08), 0 4px 6px rgb(0 0 0 / 0.05);
-
-  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-
-  font-family: var(--font-sans);
+body {
+  font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body {
   min-height: 100vh;
 }
 
@@ -52,6 +92,13 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--color-text);
 }
 
 img {
@@ -69,8 +116,82 @@ button {
   font-family: inherit;
 }
 
-input,
-select,
-textarea {
+input, select, textarea {
   font-family: inherit;
 }
+
+/* ─── Global Keyframe Animations ─────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(3deg); }
+  66%       { transform: translateY(-6px) rotate(-2deg); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400% 0; }
+  100% { background-position: 400% 0; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGreen {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(22,163,74,.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(22,163,74,0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blobMove {
+  0%, 100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%; }
+  25%       { border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%; }
+  50%       { border-radius: 70% 30% 60% 40% / 40% 70% 30% 60%; }
+  75%       { border-radius: 30% 70% 40% 60% / 70% 30% 60% 40%; }
+}
+
+/* ─── Utility Classes ─────────────────────────────────── */
+.animate-fade-in     { animation: fadeIn .5s ease both; }
+.animate-fade-in-up  { animation: fadeInUp .6s ease both; }
+.animate-scale-in    { animation: scaleIn .4s ease both; }
+.animate-float       { animation: float 5s ease-in-out infinite; }
+.animate-float-slow  { animation: floatSlow 7s ease-in-out infinite; }
+
+.delay-100 { animation-delay: .10s; }
+.delay-200 { animation-delay: .20s; }
+.delay-300 { animation-delay: .30s; }
+.delay-400 { animation-delay: .40s; }
+.delay-500 { animation-delay: .50s; }

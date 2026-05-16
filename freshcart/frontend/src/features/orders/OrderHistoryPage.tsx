@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
+import { ArrowRight, Package, Clock, CheckCircle } from 'lucide-react'
 import { useGetOrdersQuery } from './ordersApi'
 import { formatPrice } from '../../utils/formatPrice'
 import type { OrderStatus } from '../../types/models'
@@ -9,10 +10,10 @@ import EmptyState from '../../components/EmptyState/EmptyState'
 import Button from '../../components/Button/Button'
 import styles from './OrderHistoryPage.module.css'
 
-const STATUS_LABELS: Record<OrderStatus, string> = {
-  pending: '🕐 Pending',
-  confirmed: '✅ Confirmed',
-  delivered: '📦 Delivered',
+const STATUS_CONFIG: Record<OrderStatus, { label: string; icon: typeof Clock; className: string }> = {
+  pending:   { label: 'Pending',   icon: Clock,        className: 'pending' },
+  confirmed: { label: 'Confirmed', icon: CheckCircle,  className: 'confirmed' },
+  delivered: { label: 'Delivered', icon: Package,      className: 'delivered' },
 }
 
 export default function OrderHistoryPage() {
@@ -27,14 +28,14 @@ export default function OrderHistoryPage() {
   if (!orders || orders.length === 0) {
     return (
       <div>
-        <h1 className={styles.title}>Order history</h1>
+        <h1 className={styles.title}>Order History</h1>
         <EmptyState
           icon="📋"
           title="You haven't placed any orders yet"
           description="Browse our fresh produce and place your first order."
           action={
             <Link to="/products">
-              <Button>Start shopping</Button>
+              <Button>Start Shopping</Button>
             </Link>
           }
         />
@@ -47,29 +48,46 @@ export default function OrderHistoryPage() {
   )
 
   return (
-    <div>
-      <h1 className={styles.title}>Order history</h1>
+    <div className={styles.page}>
+      <div className={styles.header}>
+        <p className={styles.eyebrow}>Your purchases</p>
+        <h1 className={styles.title}>Order History</h1>
+        <p className={styles.subtitle}>{orders.length} order{orders.length !== 1 ? 's' : ''} placed</p>
+      </div>
 
       <div className={styles.list}>
-        {sorted.map(order => (
-          <Link key={order.id} to={`/orders/${order.id}`} className={styles.card}>
-            <div className={styles.cardLeft}>
-              <span className={styles.orderId}>#{order.id}</span>
-              <span className={styles.orderDate}>
-                {format(new Date(order.createdAt), 'dd MMM yyyy, HH:mm')}
-              </span>
-              <span className={styles.itemCount}>
-                {order.items.length} {order.items.length === 1 ? 'item' : 'items'}
-              </span>
-            </div>
-            <div className={styles.cardRight}>
-              <span className={styles.total}>{formatPrice(order.total)}</span>
-              <span className={[styles.status, styles[order.status]].join(' ')}>
-                {STATUS_LABELS[order.status]}
-              </span>
-            </div>
-          </Link>
-        ))}
+        {sorted.map((order, i) => {
+          const cfg = STATUS_CONFIG[order.status]
+          const Icon = cfg.icon
+          return (
+            <Link
+              key={order.id}
+              to={`/orders/${order.id}`}
+              className={styles.card}
+              style={{ animationDelay: `${i * 0.05}s` }}
+            >
+              <div className={styles.cardLeft}>
+                <span className={styles.orderId}>#{order.id.slice(0, 8)}…</span>
+                <span className={styles.orderDate}>
+                  {format(new Date(order.createdAt), 'dd MMM yyyy, HH:mm')}
+                </span>
+                <span className={styles.itemCount}>
+                  {order.items.length} {order.items.length === 1 ? 'item' : 'items'}
+                </span>
+              </div>
+              <div className={styles.cardRight}>
+                <span className={styles.total}>{formatPrice(order.total)}</span>
+                <span className={[styles.status, styles[cfg.className]].join(' ')}>
+                  <Icon size={12} strokeWidth={2.5} />
+                  {cfg.label}
+                </span>
+              </div>
+              <div className={styles.cardArrow}>
+                <ArrowRight size={16} />
+              </div>
+            </Link>
+          )
+        })}
       </div>
     </div>
   )

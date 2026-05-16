@@ -1,37 +1,48 @@
 .toast {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 300;
-  padding: 12px 20px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
+  bottom: 28px;
+  right: 28px;
+  z-index: 500;
+  padding: 14px 20px 14px 16px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #fff;
-  max-width: 360px;
-  animation: slideIn 0.2s ease;
+  max-width: 380px;
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideUp 0.3s cubic-bezier(.34,1.56,.64,1) both;
+  backdrop-filter: blur(8px);
+}
+
+.toast::before {
+  content: '';
+  width: 4px;
+  height: 32px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 2px;
+  flex-shrink: 0;
 }
 
 .success {
-  background: var(--color-success);
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  box-shadow: 0 8px 30px rgba(22, 163, 74, 0.4), var(--shadow-lg);
 }
 
 .error {
-  background: var(--color-error);
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 8px 30px rgba(220, 38, 38, 0.4), var(--shadow-lg);
 }
 
 .info {
-  background: var(--color-info);
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4), var(--shadow-lg);
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }

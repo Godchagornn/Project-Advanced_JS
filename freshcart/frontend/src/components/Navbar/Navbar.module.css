@@ -1,37 +1,62 @@
 .nav {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: var(--color-primary);
-  box-shadow: var(--shadow-md);
+  z-index: 200;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(220, 252, 231, 0.9);
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.06);
+  animation: fadeInDown 0.4s ease both;
 }
 
 .inner {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
-  height: 60px;
+  padding: 0 24px;
+  height: 68px;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 36px;
 }
 
+/* ── Logo ── */
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: -0.3px;
   flex-shrink: 0;
 }
 
-.logoIcon {
-  font-size: 1.5rem;
+.logoIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  border-radius: 10px;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.logo:hover .logoIconWrap {
+  transform: rotate(-6deg) scale(1.05);
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.45);
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.4px;
+}
+
+/* ── Desktop Nav Links ── */
 .links {
   display: flex;
   align-items: center;
@@ -40,45 +65,121 @@
 }
 
 .link {
-  color: rgb(255 255 255 / 0.85);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
-  padding: 6px 12px;
-  border-radius: var(--radius-md);
-  transition: background 0.15s, color 0.15s;
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  transition: background var(--ease-fast), color var(--ease-fast);
+  white-space: nowrap;
 }
 
 .link:hover {
-  background: rgb(255 255 255 / 0.15);
-  color: #fff;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
 }
 
 .link.active {
-  background: rgb(255 255 255 / 0.2);
-  color: #fff;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
   font-weight: 700;
 }
 
+/* ── Right Side ── */
 .right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   margin-left: auto;
 }
 
-@media (max-width: 600px) {
+/* ── Mobile toggle ── */
+.mobileToggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: var(--color-primary-light);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  transition: background var(--ease-fast);
+}
+
+.mobileToggle:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* ── Mobile Drawer ── */
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+
+.drawerInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background: #fff;
+  box-shadow: var(--shadow-xl);
+  padding: 28px 20px;
+  animation: slideInRight 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.drawerLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.drawerLogo svg {
+  color: var(--color-primary);
+}
+
+.drawerNav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.drawerNav .link {
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
   .inner {
-    gap: 12px;
-    padding: 0 12px;
+    padding: 0 16px;
+    gap: 16px;
   }
 
   .links {
-    gap: 2px;
+    display: none;
   }
 
-  .link {
-    font-size: 0.8rem;
-    padding: 5px 8px;
+  .mobileToggle {
+    display: flex;
   }
 }
