@@ -62,6 +62,12 @@
   /* Typography */
   --font-heading: 'Poppins', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, sans-serif;
+
+  /* Gradient shortcuts */
+  --gradient-primary: linear-gradient(135deg, #22c55e 0%, #16a34a 55%, #15803d 100%);
+  --gradient-warm:    linear-gradient(135deg, #fb923c 0%, #f97316 55%, #ea580c 100%);
+  --gradient-banner:  linear-gradient(135deg, #f0fdf4 0%, #dcfce7 55%, #fef9c3 100%);
+  --gradient-rainbow: linear-gradient(90deg, #22c55e, #4ade80, #fbbf24, #22c55e);
 }
 
 /* ─── Base Reset ──────────────────────────────────────── */
@@ -174,6 +180,32 @@ input, select, textarea {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0);    animation-timing-function: cubic-bezier(.8,0,1,1); }
+  50%       { transform: translateY(-14px); animation-timing-function: cubic-bezier(0,0,.2,1); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  15%  { transform: rotate(-10deg); }
+  30%  { transform: rotate(10deg); }
+  45%  { transform: rotate(-6deg); }
+  60%  { transform: rotate(6deg); }
+  75%  { transform: rotate(-3deg); }
+  90%  { transform: rotate(3deg); }
+}
+
+@keyframes popIn {
+  0%   { transform: scale(0) rotate(-12deg); opacity: 0; }
+  70%  { transform: scale(1.15) rotate(4deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes shimmerSlide {
+  0%   { left: -80%; }
+  100% { left: 140%; }
 }
 
 @keyframes blobMove {

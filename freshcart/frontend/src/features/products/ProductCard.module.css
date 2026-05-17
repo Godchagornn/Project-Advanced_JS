@@ -1,17 +1,37 @@
 .card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, border-color 0.3s ease;
   animation: fadeInUp 0.4s ease both;
+  position: relative;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-2xl);
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, #22c55e, #4ade80, #fbbf24) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover::after {
+  opacity: 1;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 40px rgba(22, 163, 74, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-8px);
+  box-shadow: 0 24px 56px rgba(22,163,74,0.18), 0 8px 20px rgba(0,0,0,0.08);
   border-color: #86efac;
 }
 
@@ -20,7 +40,7 @@
   display: block;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: var(--color-primary-pale);
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
   position: relative;
 }
 
@@ -28,40 +48,42 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.45s ease;
 }
 
 .card:hover .image {
-  transform: scale(1.06);
+  transform: scale(1.08);
 }
 
 /* Overlays */
 .outOfStockOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.42);
+  background: rgba(17,24,39,0.52);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #fff;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 }
 
 .badgeBestSeller {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: rgba(255, 255, 255, 0.93);
-  backdrop-filter: blur(8px);
+  background: linear-gradient(135deg, #fef08a, #fde047);
   border-radius: var(--radius-full);
-  padding: 4px 10px;
+  padding: 5px 11px;
   font-size: 0.69rem;
   font-weight: 800;
-  color: #92400e;
-  border: 1px solid #fcd34d;
+  color: #78350f;
+  border: 1px solid #fbbf24;
   letter-spacing: 0.3px;
+  box-shadow: 0 2px 8px rgba(245,158,11,0.35);
 }
 
 /* ── Body ── */
@@ -78,8 +100,10 @@
   font-size: 0.67rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.9px;
+  letter-spacing: 1px;
   color: var(--color-primary-dark);
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  border: 1px solid #86efac;
   padding: 3px 10px;
   border-radius: var(--radius-full);
   width: fit-content;
@@ -107,7 +131,7 @@
 .ratingRow {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
 .ratingNum {
@@ -124,33 +148,32 @@
   gap: 8px;
   margin-top: auto;
   padding-top: 10px;
-  border-top: 1px solid var(--color-border-light);
+  border-top: 1px solid #f0fdf4;
 }
 
 .cartBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  background: var(--color-primary);
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #22c55e, #15803d);
   color: #fff;
   border: none;
   border-radius: var(--radius-full);
   cursor: pointer;
   flex-shrink: 0;
-  transition: background var(--ease-fast), transform var(--ease-fast), box-shadow var(--ease-fast);
-  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+  transition: transform var(--ease-fast), box-shadow var(--ease-fast);
+  box-shadow: 0 3px 10px rgba(22,163,74,0.35);
 }
 
 .cartBtn:hover:not(:disabled) {
-  background: var(--color-primary-dark);
-  transform: scale(1.1);
-  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.45);
+  transform: scale(1.15) rotate(-8deg);
+  box-shadow: 0 6px 18px rgba(22,163,74,0.5);
 }
 
 .cartBtn:disabled {
-  background: #d1d5db;
+  background: #e5e7eb;
   box-shadow: none;
   cursor: not-allowed;
 }

@@ -22,11 +22,12 @@
   min-width: 30px;
   height: 30px;
   padding: 0 8px;
-  background: var(--color-primary-light);
-  color: var(--color-primary-dark);
+  background: linear-gradient(135deg, #22c55e, #15803d);
+  color: #fff;
   border-radius: var(--radius-full);
   font-size: 0.85rem;
   font-weight: 800;
+  box-shadow: 0 2px 8px rgba(22,163,74,0.3);
 }
 
 .list {
@@ -38,6 +39,8 @@
 
 /* Review card */
 .card {
+  position: relative;
+  overflow: hidden;
   background: var(--color-surface);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-xl);
@@ -45,13 +48,30 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: border-color var(--ease-fast), box-shadow var(--ease-fast);
+  transition: border-color var(--ease-fast), box-shadow var(--ease-fast), transform var(--ease-fast);
   animation: fadeInUp 0.4s ease both;
 }
 
+/* Top accent bar sweeps in on hover */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--ease-normal);
+}
+
 .card:hover {
-  border-color: #bbf7d0;
-  box-shadow: var(--shadow-md);
+  border-color: #d1fae5;
+  box-shadow: 0 8px 24px rgba(22,163,74,0.1);
+  transform: translateY(-2px);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
 }
 
 .cardHeader {
@@ -69,19 +89,50 @@
 
 /* Avatar circle */
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #16a34a, #15803d);
+  background: linear-gradient(135deg, #22c55e, #16a34a, #15803d);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-heading);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 800;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(22,163,74,.25);
+  box-shadow: 0 3px 10px rgba(22,163,74,0.3);
+  border: 2px solid #86efac;
+  transition: transform var(--ease-fast);
+}
+
+.card:hover .avatar {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Colorful avatars per nth-child */
+.card:nth-child(5n+2) .avatar {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  box-shadow: 0 3px 10px rgba(234,88,12,0.3);
+  border-color: #fdba74;
+}
+
+.card:nth-child(5n+3) .avatar {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  box-shadow: 0 3px 10px rgba(124,58,237,0.3);
+  border-color: #c4b5fd;
+}
+
+.card:nth-child(5n+4) .avatar {
+  background: linear-gradient(135deg, #ec4899, #db2777);
+  box-shadow: 0 3px 10px rgba(219,39,119,0.3);
+  border-color: #f9a8d4;
+}
+
+.card:nth-child(5n+5) .avatar {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  box-shadow: 0 3px 10px rgba(8,145,178,0.3);
+  border-color: #67e8f9;
 }
 
 .author {
@@ -93,9 +144,13 @@
 }
 
 .date {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-  font-weight: 500;
+  font-size: 0.73rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-pale);
+  border: 1px solid #d1fae5;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
   white-space: nowrap;
 }
 
@@ -109,7 +164,7 @@
 .body {
   font-size: 0.9rem;
   color: var(--color-text-muted);
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 .actions {
@@ -123,9 +178,9 @@
   align-items: center;
   gap: 5px;
   background: none;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-full);
-  padding: 5px 12px;
+  padding: 5px 14px;
   font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
@@ -138,7 +193,9 @@
 
 .editBtn:hover {
   background: var(--color-primary-light);
-  border-color: var(--color-primary-light);
+  border-color: #86efac;
+  color: var(--color-primary-dark);
+  transform: translateY(-1px);
 }
 
 .deleteBtn {
@@ -147,7 +204,8 @@
 
 .deleteBtn:hover {
   background: #fef2f2;
-  border-color: #fecaca;
+  border-color: #fca5a5;
+  transform: translateY(-1px);
 }
 
 /* Write / Edit form wrapper */
