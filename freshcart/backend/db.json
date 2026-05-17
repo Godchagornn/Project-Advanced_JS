@@ -264,7 +264,35 @@
 
 
 
-  "cartItems": [],
+  "cartItems": [
+    {
+      "id": "c1a2b3c4-d5e6-7f8a-9b0c-d1e2f3a4b5c6",
+      "productId": "2",
+      "name": "Nam Dok Mai Mango",
+      "imageUrl": "https://images.pexels.com/photos/30893290/pexels-photo-30893290.jpe",
+      "unitPrice": 89,
+      "quantity": 2,
+      "unit": "kg"
+    },
+    {
+      "id": "d2e3f4a5-b6c7-8d9e-0f1a-b2c3d4e5f6a7",
+      "productId": "10",
+      "name": "Organic Broccoli",
+      "imageUrl": "https://images.pexels.com/photos/36071084/pexels-photo-36071084.jpeg",
+      "unitPrice": 89,
+      "quantity": 1,
+      "unit": "piece"
+    },
+    {
+      "id": "e3f4a5b6-c7d8-9e0f-1a2b-c3d4e5f6a7b8",
+      "productId": "19",
+      "name": "Thai Holy Basil",
+      "imageUrl": "https://images.pexels.com/photos/17462827/pexels-photo-17462827.jpeg",
+      "unitPrice": 15,
+      "quantity": 3,
+      "unit": "bunch"
+    }
+  ],
 
 
 
@@ -376,6 +404,294 @@
       "title": "Crunchy and sweet",
       "body": "Really enjoyed these apples. Slightly on the smaller side but the flavour is excellent. Packaging was secure.",
       "createdAt": "2026-04-22T16:10:00.000Z"
+    },
+    {
+      "id": "r-6",
+      "productId": "3",
+      "author": "Siriporn K.",
+      "rating": 5,
+      "title": "Perfectly ripe and juicy",
+      "body": "The pineapple arrived at exactly the right ripeness — sweet all the way through with barely any tartness. Great for making smoothies.",
+      "createdAt": "2026-04-23T09:15:00.000Z"
+    },
+    {
+      "id": "r-7",
+      "productId": "3",
+      "author": "Tanawat B.",
+      "rating": 4,
+      "title": "Fresh and flavourful",
+      "body": "Really good pineapple. One of the three was a little underripe but the other two were excellent. Will order again.",
+      "createdAt": "2026-04-25T14:00:00.000Z"
+    },
+    {
+      "id": "r-8",
+      "productId": "4",
+      "author": "Nattaporn C.",
+      "rating": 5,
+      "title": "Incredibly sweet and crisp",
+      "body": "Best watermelon I have ordered online. Ice-cold from the fridge it was perfect. No seeds, pure sweetness.",
+      "createdAt": "2026-04-24T11:30:00.000Z"
+    },
+    {
+      "id": "r-9",
+      "productId": "4",
+      "author": "Kanokwan S.",
+      "rating": 4,
+      "title": "Great value for the price",
+      "body": "Very sweet and refreshing. A little smaller than expected but the flavour was spot on. Good for the whole family.",
+      "createdAt": "2026-04-26T16:45:00.000Z"
+    },
+    {
+      "id": "r-10",
+      "productId": "5",
+      "author": "Phatchara L.",
+      "rating": 4,
+      "title": "Buttery and smooth",
+      "body": "The papaya was nicely ripe with a beautiful orange flesh. A squeeze of lime makes it perfect. Arrived well-packaged.",
+      "createdAt": "2026-04-27T08:20:00.000Z"
+    },
+    {
+      "id": "r-11",
+      "productId": "5",
+      "author": "Voravit M.",
+      "rating": 4,
+      "title": "Good but one was overripe",
+      "body": "Two out of three were excellent — very sweet and creamy. One was slightly overripe. Overall still a good purchase.",
+      "createdAt": "2026-04-28T13:10:00.000Z"
+    },
+    {
+      "id": "r-12",
+      "productId": "6",
+      "author": "Supawan T.",
+      "rating": 5,
+      "title": "Stunning and delicious",
+      "body": "The pink skin was vibrant and the white flesh was perfectly mild and refreshing. High in fibre too. Will definitely reorder.",
+      "createdAt": "2026-04-29T10:00:00.000Z"
+    },
+    {
+      "id": "r-13",
+      "productId": "6",
+      "author": "Rattana P.",
+      "rating": 4,
+      "title": "Nice quality, subtle flavour",
+      "body": "Good dragon fruit — fresh and not too sweet. Great for a fruit salad. Packaging kept it safe during delivery.",
+      "createdAt": "2026-04-30T15:30:00.000Z"
+    },
+    {
+      "id": "r-14",
+      "productId": "7",
+      "author": "Chaiwat N.",
+      "rating": 5,
+      "title": "Juicy and beautiful",
+      "body": "These rambutans are stunning — bright red and perfectly ripe. The flesh was translucent and sweet with just a hint of tartness. Amazing.",
+      "createdAt": "2026-05-01T09:45:00.000Z"
+    },
+    {
+      "id": "r-15",
+      "productId": "7",
+      "author": "Monrada J.",
+      "rating": 5,
+      "title": "Best rambutan I have tasted",
+      "body": "Incredibly fresh — you can tell they were picked recently. Sweet, juicy, and the seed came off cleanly. Ordered twice already.",
+      "createdAt": "2026-05-02T11:00:00.000Z"
+    },
+    {
+      "id": "r-16",
+      "productId": "8",
+      "author": "Piyawan S.",
+      "rating": 5,
+      "title": "Honey-sweet and delicate",
+      "body": "When these were in stock they were absolutely wonderful. Like little drops of honey. Hope they restock soon!",
+      "createdAt": "2026-05-03T14:20:00.000Z"
+    },
+    {
+      "id": "r-17",
+      "productId": "8",
+      "author": "Thanapon R.",
+      "rating": 4,
+      "title": "Worth the wait",
+      "body": "Managed to get some before they sold out. Very fresh and sweet. The dragon eye nickname is well deserved — beautiful fruit.",
+      "createdAt": "2026-05-04T10:30:00.000Z"
+    },
+    {
+      "id": "r-18",
+      "productId": "9",
+      "author": "Anchana W.",
+      "rating": 5,
+      "title": "Perfect for my pasta sauce",
+      "body": "These Roma tomatoes are incredibly flavourful — rich, umami-sweet, and thick-fleshed. Made the best homemade sauce with them.",
+      "createdAt": "2026-05-05T08:00:00.000Z"
+    },
+    {
+      "id": "r-19",
+      "productId": "9",
+      "author": "Suphatra K.",
+      "rating": 4,
+      "title": "Fresh and plump",
+      "body": "Great quality tomatoes. Very ripe and juicy. A few were slightly soft on arrival but still perfectly usable. Good price.",
+      "createdAt": "2026-05-06T12:15:00.000Z"
+    },
+    {
+      "id": "r-20",
+      "productId": "11",
+      "author": "Wiparat C.",
+      "rating": 4,
+      "title": "Great snacking carrot",
+      "body": "Washed and ready to eat — very convenient. Sweet and crunchy. Kids loved them with hummus. Will be a regular order.",
+      "createdAt": "2026-05-07T09:30:00.000Z"
+    },
+    {
+      "id": "r-21",
+      "productId": "11",
+      "author": "Araya N.",
+      "rating": 5,
+      "title": "Super fresh and sweet",
+      "body": "These baby carrots are genuinely sweet — not the bland ones you get at supermarkets. Roasted beautifully with a little honey.",
+      "createdAt": "2026-05-08T13:45:00.000Z"
+    },
+    {
+      "id": "r-22",
+      "productId": "12",
+      "author": "Kanchana B.",
+      "rating": 4,
+      "title": "Good for hot pot",
+      "body": "Tender napa cabbage with a mild flavour. Perfect for our weekly shabu-shabu. Arrived fresh and well wrapped.",
+      "createdAt": "2026-05-09T10:00:00.000Z"
+    },
+    {
+      "id": "r-23",
+      "productId": "12",
+      "author": "Nalinee T.",
+      "rating": 4,
+      "title": "Fresh and versatile",
+      "body": "Used it for both stir-fry and soup this week. Held up well in the fridge for several days. Nice mild flavour.",
+      "createdAt": "2026-05-10T14:30:00.000Z"
+    },
+    {
+      "id": "r-24",
+      "productId": "13",
+      "author": "Sompong A.",
+      "rating": 5,
+      "title": "Perfectly triple-washed",
+      "body": "Ready to use straight from the bag. Leaves are tender and vibrant green. Wilts quickly so cook it fast — excellent flavour.",
+      "createdAt": "2026-05-11T08:45:00.000Z"
+    },
+    {
+      "id": "r-25",
+      "productId": "13",
+      "author": "Jiraporn V.",
+      "rating": 4,
+      "title": "Great quality spinach",
+      "body": "Fresh young leaves with no yellowing. Made a lovely garlic spinach stir-fry. Wish the bunch was slightly larger for the price.",
+      "createdAt": "2026-05-12T11:20:00.000Z"
+    },
+    {
+      "id": "r-26",
+      "productId": "14",
+      "author": "Worawan P.",
+      "rating": 4,
+      "title": "Crisp and refreshing",
+      "body": "Thin-skinned and seedless as advertised. Great in salads and fresh rolls. Very crunchy — stayed fresh for five days.",
+      "createdAt": "2026-05-01T09:00:00.000Z"
+    },
+    {
+      "id": "r-27",
+      "productId": "14",
+      "author": "Noppadon S.",
+      "rating": 4,
+      "title": "Good everyday cucumber",
+      "body": "Mild flavour and satisfying crunch. Perfect for a quick snack with dipping sauce. No seeds makes it much more enjoyable.",
+      "createdAt": "2026-05-03T15:00:00.000Z"
+    },
+    {
+      "id": "r-28",
+      "productId": "15",
+      "author": "Patcharee K.",
+      "rating": 5,
+      "title": "Incredible in hot pot",
+      "body": "These shimeji clusters are so delicate and flavourful. Added them to a hot pot and they soaked up the broth beautifully. Highly recommend.",
+      "createdAt": "2026-05-05T12:00:00.000Z"
+    },
+    {
+      "id": "r-29",
+      "productId": "15",
+      "author": "Somsak T.",
+      "rating": 5,
+      "title": "Nutty and delicious",
+      "body": "Pan-fried with butter and garlic — absolutely amazing. Very fresh with no slimy ones in the pack. Will order every week.",
+      "createdAt": "2026-05-07T18:30:00.000Z"
+    },
+    {
+      "id": "r-30",
+      "productId": "16",
+      "author": "Ladawan C.",
+      "rating": 4,
+      "title": "Sweet and caramelised when baked",
+      "body": "Baked them at 200°C for 45 minutes and they were perfectly caramelised. Natural sweetness is incredible. Hope they restock soon.",
+      "createdAt": "2026-04-28T10:00:00.000Z"
+    },
+    {
+      "id": "r-31",
+      "productId": "16",
+      "author": "Yupaporn M.",
+      "rating": 5,
+      "title": "Best sweet potatoes I have had",
+      "body": "Golden flesh that is incredibly sweet when steamed. Great texture — not stringy at all. Hoping to see them back in stock.",
+      "createdAt": "2026-04-30T09:20:00.000Z"
+    },
+    {
+      "id": "r-32",
+      "productId": "18",
+      "author": "Surasak L.",
+      "rating": 5,
+      "title": "Essential for Thai cooking",
+      "body": "The fragrance of these kaffir lime leaves is unmatched. My Tom Kha and green curry both turned out restaurant-quality. Truly fresh.",
+      "createdAt": "2026-05-06T11:00:00.000Z"
+    },
+    {
+      "id": "r-33",
+      "productId": "18",
+      "author": "Malai W.",
+      "rating": 5,
+      "title": "Fragrant and beautifully fresh",
+      "body": "Arrived in perfect condition — bright green and intensely aromatic. Froze half the bunch for later use. Outstanding quality.",
+      "createdAt": "2026-05-08T14:15:00.000Z"
+    },
+    {
+      "id": "r-34",
+      "productId": "19",
+      "author": "Boonsong P.",
+      "rating": 5,
+      "title": "Pad Kra Pao was perfect",
+      "body": "Used these for Pad Kra Pao and the peppery clove aroma was exactly right. Very fresh — wilted fast once cooked but that is how it should be.",
+      "createdAt": "2026-05-09T19:00:00.000Z"
+    },
+    {
+      "id": "r-35",
+      "productId": "19",
+      "author": "Chalermpol N.",
+      "rating": 4,
+      "title": "Fresh holy basil, great flavour",
+      "body": "Strong peppery scent right out of the bag. Used it the same day for stir-fry. Leaves were intact with no wilting. Good value.",
+      "createdAt": "2026-05-11T12:30:00.000Z"
+    },
+    {
+      "id": "r-36",
+      "productId": "20",
+      "author": "Pensri T.",
+      "rating": 5,
+      "title": "Firm and intensely aromatic",
+      "body": "The galangal rhizomes were firm and fresh with a beautiful pine-citrus punch. My Tom Kha turned out incredible. Will reorder.",
+      "createdAt": "2026-05-10T10:00:00.000Z"
+    },
+    {
+      "id": "r-37",
+      "productId": "20",
+      "author": "Usa B.",
+      "rating": 4,
+      "title": "Great for curry paste",
+      "body": "Used this in a homemade red curry paste alongside lemongrass and kaffir lime. The flavour was deep and authentic. Very fresh quality.",
+      "createdAt": "2026-05-13T15:45:00.000Z"
     }
   ]
 }
