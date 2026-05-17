@@ -110,7 +110,8 @@ export default function CartPage() {
           {shipping > 0 && (
             <div className={styles.shippingProgress}>
               <p className={styles.shippingMsg}>
-                🎉 Add <strong>{formatPrice(SHIPPING_THRESHOLD - subtotal)}</strong> more for free delivery!
+                🎉 Add <strong>{formatPrice(SHIPPING_THRESHOLD - subtotal)}</strong> more for free
+                delivery!
               </p>
               <div className={styles.progressBar}>
                 <div className={styles.progressFill} style={{ width: `${shippingProgress}%` }} />

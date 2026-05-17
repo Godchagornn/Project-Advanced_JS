@@ -138,9 +138,7 @@ export default function ProductDetailPage() {
           )}
 
           {!product.inStock && (
-            <p className={styles.outOfStockMsg}>
-              This item is currently out of stock.
-            </p>
+            <p className={styles.outOfStockMsg}>This item is currently out of stock.</p>
           )}
 
           {/* Trust badges */}

@@ -222,7 +222,9 @@ export default function CheckoutPage() {
               >
                 <Banknote size={20} strokeWidth={2} />
                 Cash on Delivery
-                {fields.paymentMethod === 'cash' && <Check size={16} className={styles.checkIcon} />}
+                {fields.paymentMethod === 'cash' && (
+                  <Check size={16} className={styles.checkIcon} />
+                )}
               </button>
               <button
                 type="button"
@@ -236,7 +238,9 @@ export default function CheckoutPage() {
               >
                 <CreditCard size={20} strokeWidth={2} />
                 Card (mock)
-                {fields.paymentMethod === 'card' && <Check size={16} className={styles.checkIcon} />}
+                {fields.paymentMethod === 'card' && (
+                  <Check size={16} className={styles.checkIcon} />
+                )}
               </button>
             </div>
             {errors.paymentMethod && (
@@ -304,9 +308,7 @@ export default function CheckoutPage() {
             <span>{formatPrice(total)}</span>
           </div>
 
-          <div className={styles.securityBadge}>
-            🔒 SSL Secured &amp; Encrypted
-          </div>
+          <div className={styles.securityBadge}>🔒 SSL Secured &amp; Encrypted</div>
         </div>
       </div>
     </div>

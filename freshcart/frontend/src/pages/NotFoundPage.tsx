@@ -17,8 +17,7 @@ export default function NotFoundPage() {
       </div>
       <h1 className={styles.title}>Page Not Found</h1>
       <p className={styles.description}>
-        Looks like this page has gone off the shelf. Let&apos;s get you back
-        to the fresh picks.
+        Looks like this page has gone off the shelf. Let&apos;s get you back to the fresh picks.
       </p>
       <div className={styles.actions}>
         <Link to="/">

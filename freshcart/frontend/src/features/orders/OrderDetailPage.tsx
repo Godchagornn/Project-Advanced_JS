@@ -8,11 +8,12 @@ import Spinner from '../../components/Spinner/Spinner'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import styles from './OrderDetailPage.module.css'
 
-const STATUS_CONFIG: Record<OrderStatus, { label: string; icon: typeof Clock; className: string }> = {
-  pending:   { label: 'Pending',   icon: Clock,       className: 'pending' },
-  confirmed: { label: 'Confirmed', icon: CheckCircle, className: 'confirmed' },
-  delivered: { label: 'Delivered', icon: Package,     className: 'delivered' },
-}
+const STATUS_CONFIG: Record<OrderStatus, { label: string; icon: typeof Clock; className: string }> =
+  {
+    pending: { label: 'Pending', icon: Clock, className: 'pending' },
+    confirmed: { label: 'Confirmed', icon: CheckCircle, className: 'confirmed' },
+    delivered: { label: 'Delivered', icon: Package, className: 'delivered' },
+  }
 
 export default function OrderDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -85,9 +86,15 @@ export default function OrderDetailPage() {
                 <span className={styles.infoLabel}>Payment</span>
                 <span className={styles.infoValue}>
                   <span className={styles.paymentChip}>
-                    {order.paymentMethod === 'card'
-                      ? <><CreditCard size={13} /> Card ···· {order.cardLast4}</>
-                      : <><Banknote size={13} /> Cash on delivery</>}
+                    {order.paymentMethod === 'card' ? (
+                      <>
+                        <CreditCard size={13} /> Card ···· {order.cardLast4}
+                      </>
+                    ) : (
+                      <>
+                        <Banknote size={13} /> Cash on delivery
+                      </>
+                    )}
                   </span>
                 </span>
               </div>

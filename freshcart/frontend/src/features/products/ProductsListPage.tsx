@@ -40,7 +40,7 @@ const SORT_OPTIONS = [
 ]
 
 const RATING_OPTIONS = [
-  { value: 0,   label: 'All ratings' },
+  { value: 0, label: 'All ratings' },
   { value: 4.5, label: '4.5 & up' },
   { value: 4.7, label: '4.7 & up' },
   { value: 4.9, label: '4.9 & up' },
@@ -50,8 +50,8 @@ function StarRow({ rating }: { rating: number }) {
   return (
     <span className={styles.stars}>
       {Array.from({ length: 5 }).map((_, i) => {
-        const full  = i < Math.floor(rating)
-        const half  = !full && i < rating && rating % 1 >= 0.3
+        const full = i < Math.floor(rating)
+        const half = !full && i < rating && rating % 1 >= 0.3
         return (
           <span
             key={i}
@@ -82,7 +82,9 @@ export default function ProductsListPage() {
   const { isLoading, isError, refetch } = useGetProductsQuery()
   const filtered = useAppSelector(selectSortedProducts)
 
-  useEffect(() => { dispatch(setSearch(debouncedSearch)) }, [debouncedSearch, dispatch])
+  useEffect(() => {
+    dispatch(setSearch(debouncedSearch))
+  }, [debouncedSearch, dispatch])
 
   useEffect(() => {
     const cat = searchParams.get('category') as CategoryFilter | null
@@ -91,7 +93,7 @@ export default function ProductsListPage() {
     }
   }, [searchParams, dispatch])
 
-  const fillLeft  = ((localMin - PRICE_MIN) / (PRICE_MAX - PRICE_MIN)) * 100
+  const fillLeft = ((localMin - PRICE_MIN) / (PRICE_MAX - PRICE_MIN)) * 100
   const fillRight = 100 - ((localMax - PRICE_MIN) / (PRICE_MAX - PRICE_MIN)) * 100
 
   const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,7 +108,6 @@ export default function ProductsListPage() {
 
   return (
     <div className={styles.page}>
-
       {/* ── Page header ── */}
       <div className={styles.header}>
         <p className={styles.eyebrow}>Our Collection</p>
@@ -118,10 +119,8 @@ export default function ProductsListPage() {
 
       {/* ── Body: sidebar + main ── */}
       <div className={styles.layout}>
-
         {/* ── Sidebar ── */}
         <aside className={styles.sidebar}>
-
           {/* Categories */}
           <div className={styles.sidebarSection}>
             <p className={styles.sidebarLabel}>Categories</p>
@@ -133,7 +132,9 @@ export default function ProductsListPage() {
                   className={[
                     styles.filterBtn,
                     category === opt.value ? styles.filterBtnActive : '',
-                  ].filter(Boolean).join(' ')}
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
                   onClick={() => dispatch(setCategory(opt.value as CategoryFilter))}
                 >
                   <span className={styles.filterEmoji}>{opt.emoji}</span>
@@ -207,13 +208,16 @@ export default function ProductsListPage() {
                   className={[
                     styles.ratingBtn,
                     minRating === opt.value ? styles.ratingBtnActive : '',
-                  ].filter(Boolean).join(' ')}
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
                   onClick={() => dispatch(setMinRating(opt.value))}
                 >
-                  {opt.value === 0
-                    ? <span className={styles.stars}>{'★★★★★'}</span>
-                    : <StarRow rating={opt.value} />
-                  }
+                  {opt.value === 0 ? (
+                    <span className={styles.stars}>{'★★★★★'}</span>
+                  ) : (
+                    <StarRow rating={opt.value} />
+                  )}
                   <span className={styles.ratingLabel}>{opt.label}</span>
                 </button>
               ))}
@@ -234,12 +238,10 @@ export default function ProductsListPage() {
               In stock only
             </label>
           </div>
-
         </aside>
 
         {/* ── Main content ── */}
         <div className={styles.main}>
-
           {/* Toolbar */}
           <div className={styles.toolbar}>
             <div className={styles.searchWrap}>
@@ -261,7 +263,9 @@ export default function ProductsListPage() {
               <div className={styles.viewToggle}>
                 <button
                   type="button"
-                  className={[styles.viewBtn, viewMode === 'grid' ? styles.active : ''].filter(Boolean).join(' ')}
+                  className={[styles.viewBtn, viewMode === 'grid' ? styles.active : '']
+                    .filter(Boolean)
+                    .join(' ')}
                   onClick={() => dispatch(setViewMode('grid'))}
                   aria-label="Grid view"
                 >
@@ -269,7 +273,9 @@ export default function ProductsListPage() {
                 </button>
                 <button
                   type="button"
-                  className={[styles.viewBtn, viewMode === 'list' ? styles.active : ''].filter(Boolean).join(' ')}
+                  className={[styles.viewBtn, viewMode === 'list' ? styles.active : '']
+                    .filter(Boolean)
+                    .join(' ')}
                   onClick={() => dispatch(setViewMode('list'))}
                   aria-label="List view"
                 >

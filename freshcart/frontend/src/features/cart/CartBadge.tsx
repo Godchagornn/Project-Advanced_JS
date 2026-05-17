@@ -10,9 +10,7 @@ export default function CartBadge() {
   return (
     <Link to="/cart" className={styles.link} aria-label={`Cart, ${count} items`}>
       <ShoppingCart size={22} strokeWidth={2} />
-      {count > 0 && (
-        <span className={styles.badge}>{count > 99 ? '99+' : count}</span>
-      )}
+      {count > 0 && <span className={styles.badge}>{count > 99 ? '99+' : count}</span>}
     </Link>
   )
 }

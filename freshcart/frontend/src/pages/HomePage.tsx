@@ -85,7 +85,6 @@ export default function HomePage() {
 
   return (
     <div className={styles.page}>
-
       {/* ── Section 1: Hero ── */}
       <section className={styles.hero}>
         {/* Left panel — clean white + text */}
@@ -131,7 +130,9 @@ export default function HomePage() {
               className={item.yellow ? styles.marqueeItemYellow : styles.marqueeItemWhite}
             >
               {item.text}
-              <span className={styles.marqueeSep} aria-hidden="true">•</span>
+              <span className={styles.marqueeSep} aria-hidden="true">
+                •
+              </span>
             </span>
           ))}
         </div>
@@ -181,11 +182,7 @@ export default function HomePage() {
               to={`/products?category=${cat.key}`}
               className={styles.categoryCard}
             >
-              <img
-                src={cat.image}
-                alt={cat.label}
-                className={styles.categoryImage}
-              />
+              <img src={cat.image} alt={cat.label} className={styles.categoryImage} />
               <div
                 className={styles.categoryOverlay}
                 style={{
@@ -198,9 +195,7 @@ export default function HomePage() {
                 {!isLoading && (
                   <p className={styles.categoryCount}>{categoryCount(cat.key)} items</p>
                 )}
-                <span className={styles.categoryShopBtn}>
-                  Shop {cat.label} →
-                </span>
+                <span className={styles.categoryShopBtn}>Shop {cat.label} →</span>
               </div>
             </Link>
           ))}
@@ -242,8 +237,6 @@ export default function HomePage() {
           </div>
         )}
       </section>
-
-
     </div>
   )
 }

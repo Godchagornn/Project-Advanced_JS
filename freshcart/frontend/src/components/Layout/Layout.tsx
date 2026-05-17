@@ -68,29 +68,53 @@ export default function Layout({ children }: Props) {
               Fresh fruits, vegetables &amp; herbs delivered straight from local farms to your door.
             </p>
             <div className={styles.socialRow}>
-              <a href="#" className={styles.socialBtn} aria-label="Facebook"><Globe size={16} /></a>
-              <a href="#" className={styles.socialBtn} aria-label="Instagram"><Share2 size={16} /></a>
-              <a href="#" className={styles.socialBtn} aria-label="Twitter"><Rss size={16} /></a>
-              <a href="#" className={styles.socialBtn} aria-label="Line"><MessageCircle size={16} /></a>
+              <a href="#" className={styles.socialBtn} aria-label="Facebook">
+                <Globe size={16} />
+              </a>
+              <a href="#" className={styles.socialBtn} aria-label="Instagram">
+                <Share2 size={16} />
+              </a>
+              <a href="#" className={styles.socialBtn} aria-label="Twitter">
+                <Rss size={16} />
+              </a>
+              <a href="#" className={styles.socialBtn} aria-label="Line">
+                <MessageCircle size={16} />
+              </a>
             </div>
           </div>
 
           {/* Column 2 – Shop */}
           <div className={styles.footerCol}>
             <p className={styles.footerColTitle}>Shop</p>
-            <Link to="/products" className={styles.footerLink}>All Products</Link>
-            <Link to="/products?category=fruits" className={styles.footerLink}>Fruits</Link>
-            <Link to="/products?category=vegetables" className={styles.footerLink}>Vegetables</Link>
-            <Link to="/products?category=herbs" className={styles.footerLink}>Herbs</Link>
+            <Link to="/products" className={styles.footerLink}>
+              All Products
+            </Link>
+            <Link to="/products?category=fruits" className={styles.footerLink}>
+              Fruits
+            </Link>
+            <Link to="/products?category=vegetables" className={styles.footerLink}>
+              Vegetables
+            </Link>
+            <Link to="/products?category=herbs" className={styles.footerLink}>
+              Herbs
+            </Link>
           </div>
 
           {/* Column 3 – Customer service */}
           <div className={styles.footerCol}>
             <p className={styles.footerColTitle}>Customer Service</p>
-            <a href="#" className={styles.footerLink}>About Us</a>
-            <a href="#" className={styles.footerLink}>Delivery Info</a>
-            <a href="#" className={styles.footerLink}>Returns &amp; Refunds</a>
-            <a href="#" className={styles.footerLink}>FAQs</a>
+            <a href="#" className={styles.footerLink}>
+              About Us
+            </a>
+            <a href="#" className={styles.footerLink}>
+              Delivery Info
+            </a>
+            <a href="#" className={styles.footerLink}>
+              Returns &amp; Refunds
+            </a>
+            <a href="#" className={styles.footerLink}>
+              FAQs
+            </a>
           </div>
 
           {/* Column 4 – Contact */}
@@ -113,7 +137,9 @@ export default function Layout({ children }: Props) {
 
         {/* Bottom bar */}
         <div className={styles.footerBottom}>
-          <span>© {new Date().getFullYear()} FreshCart — Fresh fruits &amp; vegetables delivered</span>
+          <span>
+            © {new Date().getFullYear()} FreshCart — Fresh fruits &amp; vegetables delivered
+          </span>
           <div className={styles.paymentBadges}>
             <span className={styles.payBadge}>VISA</span>
             <span className={styles.payBadge}>MC</span>

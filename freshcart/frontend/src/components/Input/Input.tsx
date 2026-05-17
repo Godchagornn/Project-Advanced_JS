@@ -19,7 +19,12 @@ export default function Input({ label, error, icon, id, className = '', ...rest 
         {icon && <span className={styles.icon}>{icon}</span>}
         <input
           id={id}
-          className={[styles.input, error ? styles.hasError : '', icon ? styles.withIcon : '', className]
+          className={[
+            styles.input,
+            error ? styles.hasError : '',
+            icon ? styles.withIcon : '',
+            className,
+          ]
             .filter(Boolean)
             .join(' ')}
           {...rest}

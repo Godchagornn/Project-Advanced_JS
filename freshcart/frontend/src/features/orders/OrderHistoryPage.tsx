@@ -10,11 +10,12 @@ import EmptyState from '../../components/EmptyState/EmptyState'
 import Button from '../../components/Button/Button'
 import styles from './OrderHistoryPage.module.css'
 
-const STATUS_CONFIG: Record<OrderStatus, { label: string; icon: typeof Clock; className: string }> = {
-  pending:   { label: 'Pending',   icon: Clock,        className: 'pending' },
-  confirmed: { label: 'Confirmed', icon: CheckCircle,  className: 'confirmed' },
-  delivered: { label: 'Delivered', icon: Package,      className: 'delivered' },
-}
+const STATUS_CONFIG: Record<OrderStatus, { label: string; icon: typeof Clock; className: string }> =
+  {
+    pending: { label: 'Pending', icon: Clock, className: 'pending' },
+    confirmed: { label: 'Confirmed', icon: CheckCircle, className: 'confirmed' },
+    delivered: { label: 'Delivered', icon: Package, className: 'delivered' },
+  }
 
 export default function OrderHistoryPage() {
   const { data: orders, isLoading, isError, refetch } = useGetOrdersQuery()
@@ -55,20 +56,28 @@ export default function OrderHistoryPage() {
       <div className={styles.header}>
         <p className={styles.eyebrow}>Your purchases</p>
         <h1 className={styles.title}>Order History</h1>
-        <p className={styles.subtitle}>{orders.length} order{orders.length !== 1 ? 's' : ''} placed</p>
+        <p className={styles.subtitle}>
+          {orders.length} order{orders.length !== 1 ? 's' : ''} placed
+        </p>
 
         <div className={styles.statsStrip}>
           <div className={styles.statChip}>
             <Package size={13} strokeWidth={2.5} />
-            <span><strong>{orders.length}</strong> orders</span>
+            <span>
+              <strong>{orders.length}</strong> orders
+            </span>
           </div>
           <div className={styles.statChip}>
-            <span>Total spent: <strong>{formatPrice(totalSpent)}</strong></span>
+            <span>
+              Total spent: <strong>{formatPrice(totalSpent)}</strong>
+            </span>
           </div>
           {deliveredCount > 0 && (
             <div className={[styles.statChip, styles.statChipGreen].join(' ')}>
               <CheckCircle size={13} strokeWidth={2.5} />
-              <span><strong>{deliveredCount}</strong> delivered</span>
+              <span>
+                <strong>{deliveredCount}</strong> delivered
+              </span>
             </div>
           )}
         </div>
