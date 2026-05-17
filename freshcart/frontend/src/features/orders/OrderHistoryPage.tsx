@@ -47,12 +47,31 @@ export default function OrderHistoryPage() {
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   )
 
+  const totalSpent = orders.reduce((sum, o) => sum + o.total, 0)
+  const deliveredCount = orders.filter(o => o.status === 'delivered').length
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
         <p className={styles.eyebrow}>Your purchases</p>
         <h1 className={styles.title}>Order History</h1>
         <p className={styles.subtitle}>{orders.length} order{orders.length !== 1 ? 's' : ''} placed</p>
+
+        <div className={styles.statsStrip}>
+          <div className={styles.statChip}>
+            <Package size={13} strokeWidth={2.5} />
+            <span><strong>{orders.length}</strong> orders</span>
+          </div>
+          <div className={styles.statChip}>
+            <span>Total spent: <strong>{formatPrice(totalSpent)}</strong></span>
+          </div>
+          {deliveredCount > 0 && (
+            <div className={[styles.statChip, styles.statChipGreen].join(' ')}>
+              <CheckCircle size={13} strokeWidth={2.5} />
+              <span><strong>{deliveredCount}</strong> delivered</span>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className={styles.list}>
@@ -64,8 +83,12 @@ export default function OrderHistoryPage() {
               key={order.id}
               to={`/orders/${order.id}`}
               className={styles.card}
+              data-status={order.status}
               style={{ animationDelay: `${i * 0.05}s` }}
             >
+              <div className={styles.cardIcon} data-status={order.status}>
+                <Icon size={18} strokeWidth={2} />
+              </div>
               <div className={styles.cardLeft}>
                 <span className={styles.orderId}>#{order.id.slice(0, 8)}…</span>
                 <span className={styles.orderDate}>
