@@ -21,7 +21,7 @@
 
 .footerWave {
   width: 100%;
-  height: 60px;
+  height: 36px;
   overflow: hidden;
   background: var(--color-bg);
   line-height: 0;
@@ -35,10 +35,10 @@
 .footerInner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 56px 24px 40px;
+  padding: 32px 24px 24px;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 40px;
+  gap: 28px;
 }
 
 /* Column 1 – Brand */
@@ -152,7 +152,7 @@
 .footerBottom {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px 24px;
+  padding: 14px 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
@@ -194,8 +194,8 @@
 
   .footerInner {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 40px 20px 32px;
+    gap: 20px;
+    padding: 28px 20px 20px;
   }
 
   .footerBottom {
